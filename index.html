@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chuds.dev — Premium Software From the Basement</title>
+  <meta name="description" content="Indie developer portfolio by Huddled. Tools that are actually good — even if the name suggests otherwise.">
+  <meta name="author" content="Huddled">
+  <meta name="theme-color" content="#22d3ee">
+
+  <!-- Open Graph (Discord, iMessage, Slack, etc.) -->
+  <meta property="og:title" content="chuds.dev">
+  <meta property="og:description" content="Premium software engineered from the basement. No cap.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chuds.dev">
+  <meta property="og:site_name" content="chuds.dev">
+  <meta property="og:image" content="https://chuds.dev/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="chuds.dev — Premium software engineered from the basement">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@huddledaim">
+  <meta name="twitter:creator" content="@huddledaim">
+  <meta name="twitter:title" content="chuds.dev">
+  <meta name="twitter:description" content="Premium software engineered from the basement. No cap.">
+  <meta name="twitter:image" content="https://chuds.dev/og.png">
+  <meta name="twitter:image:alt" content="chuds.dev — Premium software engineered from the basement">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* Scanline overlay */
+    .scanlines::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.008) 2px,
+        rgba(255, 255, 255, 0.008) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Animated gradient bg */
+    .hero-gradient {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(52, 211, 153, 0.05), transparent),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(34, 211, 238, 0.04), transparent);
+      animation: gradientShift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background:
+          radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.08), transparent),
+          radial-gradient(ellipse 60% 40% at 80% 50%, rgba(52, 211, 153, 0.05), transparent),
+          radial-gradient(ellipse 60% 40% at 20% 80%, rgba(34, 211, 238, 0.04), transparent);
+      }
+      50% {
+        background:
+          radial-gradient(ellipse 80% 50% at 40% -10%, rgba(52, 211, 153, 0.08), transparent),
+          radial-gradient(ellipse 60% 40% at 20% 60%, rgba(34, 211, 238, 0.06), transparent),
+          radial-gradient(ellipse 60% 40% at 70% 80%, rgba(52, 211, 153, 0.04), transparent);
+      }
+      100% {
+        background:
+          radial-gradient(ellipse 80% 50% at 60% -15%, rgba(34, 211, 238, 0.07), transparent),
+          radial-gradient(ellipse 60% 40% at 70% 40%, rgba(52, 211, 153, 0.06), transparent),
+          radial-gradient(ellipse 60% 40% at 30% 70%, rgba(34, 211, 238, 0.05), transparent);
+      }
+    }
+
+    /* Glow effects */
+    .glow-cyan { box-shadow: 0 0 30px -5px rgba(34, 211, 238, 0.3); }
+    .glow-emerald { box-shadow: 0 0 30px -5px rgba(52, 211, 153, 0.3); }
+
+    .card-glow {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .card-glow:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 20px 40px -15px rgba(0, 0, 0, 0.5),
+        0 0 50px -10px rgba(34, 211, 238, 0.15);
+    }
+
+    /* Glass */
+    .glass {
+      background: rgba(9, 9, 11, 0.7);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    }
+
+    .glass-card {
+      background: rgba(24, 24, 27, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Slide-up animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+    .stagger > .reveal:nth-child(2) { transition-delay: 120ms; }
+    .stagger > .reveal:nth-child(3) { transition-delay: 240ms; }
+
+    /* Subtle pulse */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .pulse-dot {
+      animation: subtlePulse 3s ease-in-out infinite;
+    }
+
+    /* Text shimmer */
+    .shimmer {
+      background: linear-gradient(
+        110deg,
+        rgba(34, 211, 238, 0) 0%,
+        rgba(34, 211, 238, 0.08) 40%,
+        rgba(52, 211, 153, 0.08) 60%,
+        rgba(52, 211, 153, 0) 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 8s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Cursor blink */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-blink {
+      animation: blink 1.1s step-end infinite;
+    }
+
+    /* Noise texture */
+    .noise::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.015;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Border gradient trick */
+    .border-gradient {
+      position: relative;
+    }
+    .border-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(52, 211, 153, 0.1), transparent 60%);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      pointer-events: none;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .mobile-overlay {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Nav show/hide */
+    .nav-hidden { transform: translateY(-100%); opacity: 0; }
+    .nav-visible { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased noise">
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-hidden">
+    <div class="glass border-b border-zinc-800/50">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#hero" class="text-lg font-bold tracking-tight group">
+          chuds<span class="text-cyan-400 transition-colors duration-300 group-hover:text-emerald-400">.dev</span>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300">About</a>
+          <a href="#projects" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300">Projects</a>
+          <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-zinc-100 transition-colors duration-300" aria-label="GitHub">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button id="menuBtn" class="md:hidden text-zinc-400 hover:text-zinc-100 transition-colors p-2 -mr-2" aria-label="Toggle menu">
+          <svg id="menuIcon" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 z-40 bg-black/60 mobile-overlay" onclick="toggleMenu()"></div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="fixed top-0 right-0 bottom-0 z-50 w-72 mobile-menu glass border-l border-zinc-800/50">
+    <div class="p-6">
+      <div class="flex justify-end mb-10">
+        <button onclick="toggleMenu()" class="text-zinc-400 hover:text-zinc-100 transition-colors p-2 -mr-2" aria-label="Close menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-col gap-6">
+        <a href="#about" onclick="toggleMenu()" class="text-xl text-zinc-300 hover:text-zinc-100 transition-colors">About</a>
+        <a href="#projects" onclick="toggleMenu()" class="text-xl text-zinc-300 hover:text-zinc-100 transition-colors">Projects</a>
+        <div class="h-px bg-zinc-800 my-2"></div>
+        <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-zinc-400 hover:text-zinc-100 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://x.com/huddledaim" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-zinc-400 hover:text-zinc-100 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>@huddledaim</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden scanlines">
+    <!-- Animated gradient background -->
+    <div class="absolute inset-0 hero-gradient"></div>
+
+    <!-- Grid lines -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <!-- Status badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 mb-10">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+        <span class="text-xs font-medium text-zinc-400 tracking-wide uppercase">Shipping code</span>
+      </div>
+
+      <!-- Main headline -->
+      <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6">
+        chuds<span class="text-cyan-400">.dev</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 font-light mb-4 max-w-2xl mx-auto leading-relaxed">
+        Premium software engineered from the basement.<span class="text-zinc-500 ml-1">No cap.</span>
+      </p>
+
+      <!-- Tagline -->
+      <p class="text-sm sm:text-base text-zinc-500 mb-12 max-w-lg mx-auto font-mono">
+        <span class="text-zinc-600">~/</span> I build tools that are actually good — even if the name suggests otherwise.<span class="cursor-blink text-cyan-400/60">▎</span>
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#projects" class="group relative inline-flex items-center gap-2 px-8 py-3.5 bg-cyan-400/10 text-cyan-400 rounded-lg font-medium text-sm border border-cyan-400/20 hover:bg-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300">
+          <span>View Projects</span>
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 px-8 py-3.5 text-zinc-400 rounded-lg font-medium text-sm border border-zinc-800 hover:border-zinc-700 hover:text-zinc-200 transition-all duration-300">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+          <svg class="w-3 h-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600">
+      <span class="text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-zinc-600 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <section id="about" class="relative py-32 sm:py-40">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal">
+        <!-- Section label -->
+        <div class="flex items-center gap-4 mb-16">
+          <span class="text-xs font-mono text-cyan-400/60 uppercase tracking-[0.25em]">01</span>
+          <div class="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent"></div>
+          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.25em]">About</span>
+        </div>
+
+        <div class="grid md:grid-cols-[1fr_2fr] gap-12 md:gap-16 items-start">
+          <!-- Identity card -->
+          <div class="border-gradient rounded-2xl p-6 glass-card">
+            <div class="flex items-center gap-4 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-emerald-400/10 flex items-center justify-center text-lg font-bold text-cyan-400 border border-cyan-400/10">
+                H
+              </div>
+              <div>
+                <p class="font-semibold text-zinc-100">Huddled</p>
+                <p class="text-sm text-zinc-500 font-mono">@8tp</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">Indie Dev</span>
+              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">Full Stack</span>
+              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">macOS</span>
+              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">Web</span>
+            </div>
+          </div>
+
+          <!-- Bio -->
+          <div>
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6 leading-tight">
+              Building things that <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">actually work</span>
+            </h2>
+            <div class="space-y-4 text-zinc-400 leading-relaxed">
+              <p>
+                <span class="text-zinc-200 font-medium">Huddled</span> (aka <span class="font-mono text-cyan-400/80">8tp</span>). Indie developer who spends way too much time in the aim trainer and even more time making sure other people can too.
+              </p>
+              <p>
+                Currently shipping small, obsessive tools that solve real problems — and some that just entertain the boys in the Discord.
+              </p>
+              <p class="text-zinc-500 text-sm font-mono shimmer rounded-lg py-3 px-4 border border-zinc-800/50">
+                Philosophy: if it's worth building, it's worth over-engineering at 2 AM.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROJECTS ═══════════════════ -->
+  <section id="projects" class="relative py-32 sm:py-40">
+    <!-- Faint section background -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/[0.015] to-transparent"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6">
+      <!-- Section label -->
+      <div class="reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="text-xs font-mono text-cyan-400/60 uppercase tracking-[0.25em]">02</span>
+          <div class="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent"></div>
+          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.25em]">Projects</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          Things I've shipped
+        </h2>
+        <p class="text-zinc-500 mb-16 max-w-lg">Obsessively crafted, thoroughly tested, and mostly finished.</p>
+      </div>
+
+      <!-- Cards grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+
+        <!-- HudAim -->
+        <article class="reveal card-glow border-gradient rounded-2xl glass-card overflow-hidden group">
+          <div class="p-7">
+            <!-- Header -->
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400/20 to-cyan-400/5 flex items-center justify-center border border-cyan-400/10">
+                <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Web App</span>
+            </div>
+
+            <h3 class="text-xl font-bold mb-2 text-zinc-100 group-hover:text-cyan-400 transition-colors duration-300">HudAim</h3>
+            <p class="text-sm text-zinc-400 mb-5 leading-relaxed">Browser-based aim training that actually works — so you can finally stop whiffing.</p>
+
+            <!-- Features -->
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-emerald-400/60 mt-0.5">&#9656;</span>
+                6 game modes: Reaction Time, Grid Shot, Tracking, and more
+              </li>
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-emerald-400/60 mt-0.5">&#9656;</span>
+                60 FPS replay system + LAN leaderboards
+              </li>
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-emerald-400/60 mt-0.5">&#9656;</span>
+                HMAC-SHA256 anti-cheat, offline-first with server sync
+              </li>
+            </ul>
+
+            <!-- Tech pills -->
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">React 19</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Tailwind</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Node/Express</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">IndexedDB</span>
+            </div>
+
+            <!-- Links -->
+            <div class="flex gap-3">
+              <a href="https://github.com/8tp/hudaim" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 hover:text-cyan-400 transition-colors duration-300">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+                <svg class="w-2.5 h-2.5 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Coup -->
+        <article class="reveal card-glow border-gradient rounded-2xl glass-card overflow-hidden group">
+          <div class="p-7">
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400/20 to-emerald-400/5 flex items-center justify-center border border-emerald-400/10">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Multiplayer</span>
+            </div>
+
+            <h3 class="text-xl font-bold mb-2 text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300">Coup</h3>
+            <p class="text-sm text-zinc-400 mb-5 leading-relaxed">The classic bluffing card game, now online so you can lie to your friends in real time.</p>
+
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-cyan-400/60 mt-0.5">&#9656;</span>
+                Real-time multiplayer (2-6 players) via WebSockets
+              </li>
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-cyan-400/60 mt-0.5">&#9656;</span>
+                Server-authoritative rules — no cheating, only bluffing
+              </li>
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-cyan-400/60 mt-0.5">&#9656;</span>
+                AI bots with actual strategy, room codes, mobile-first UI
+              </li>
+            </ul>
+
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Next.js</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">TypeScript</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Socket.io</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Tailwind</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Zustand</span>
+            </div>
+
+            <div class="flex gap-3">
+              <a href="https://github.com/8tp/Coup" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 hover:text-emerald-400 transition-colors duration-300">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+                <svg class="w-2.5 h-2.5 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- LiteStats -->
+        <article class="reveal card-glow border-gradient rounded-2xl glass-card overflow-hidden group md:col-span-2 lg:col-span-1">
+          <div class="p-7">
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400/10 to-emerald-400/10 flex items-center justify-center border border-cyan-400/10">
+                <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">macOS</span>
+            </div>
+
+            <h3 class="text-xl font-bold mb-2 text-zinc-100 group-hover:text-cyan-400 transition-colors duration-300">LiteStats</h3>
+            <p class="text-sm text-zinc-400 mb-5 leading-relaxed">The macOS menu bar app that actually tells you what's going on without eating your RAM.</p>
+
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-emerald-400/60 mt-0.5">&#9656;</span>
+                CPU, RAM, storage, network, battery, temperature monitoring
+              </li>
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-emerald-400/60 mt-0.5">&#9656;</span>
+                Sparkline charts + process list with actions
+              </li>
+              <li class="flex items-start gap-2 text-xs text-zinc-500">
+                <span class="text-emerald-400/60 mt-0.5">&#9656;</span>
+                Customizable polling, thermal pressure, uptime tracking
+              </li>
+            </ul>
+
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Swift</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">SwiftUI</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">IOKit</span>
+            </div>
+
+            <div class="flex gap-3">
+              <a href="https://github.com/8tp/LiteStats" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 hover:text-cyan-400 transition-colors duration-300">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+                <svg class="w-2.5 h-2.5 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="relative border-t border-zinc-800/50">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+        <!-- Left -->
+        <div class="text-center md:text-left">
+          <a href="#hero" class="text-lg font-bold tracking-tight inline-block mb-3">
+            chuds<span class="text-cyan-400">.dev</span>
+          </a>
+          <p class="text-sm text-zinc-600">&copy; 2026 chuds.dev &mdash; All rights reserved (except the memes)</p>
+        </div>
+
+        <!-- Socials -->
+        <div class="flex items-center gap-5">
+          <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-200 transition-colors duration-300" aria-label="GitHub">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://x.com/huddledaim" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-200 transition-colors duration-300" aria-label="X (Twitter)">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom line -->
+      <div class="mt-12 pt-8 border-t border-zinc-800/30 text-center">
+        <p class="text-xs text-zinc-700 font-mono">Made with Tailwind and too much caffeine</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+  <script>
+    // ── Navbar show/hide on scroll ──
+    const navbar = document.getElementById('navbar');
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateNav() {
+      const scrollY = window.scrollY;
+      if (scrollY > 100) {
+        navbar.classList.remove('nav-hidden');
+        navbar.classList.add('nav-visible');
+      } else {
+        navbar.classList.remove('nav-visible');
+        navbar.classList.add('nav-hidden');
+      }
+      lastScrollY = scrollY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNav);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // ── Mobile menu ──
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    let menuOpen = false;
+
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      mobileOverlay.classList.toggle('open', menuOpen);
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+
+    // ── Scroll reveal ──
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
