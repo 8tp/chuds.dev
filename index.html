@@ -31,14 +31,15 @@
   <meta name="robots" content="index, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
@@ -47,135 +48,154 @@
   </script>
   <style>
     /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #09090b; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
 
-    /* Scanline overlay */
-    .scanlines::after {
-      content: '';
+    /* Mesh gradient hero */
+    .mesh-gradient {
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.008) 2px,
-        rgba(255, 255, 255, 0.008) 4px
-      );
-      pointer-events: none;
-      z-index: 1;
+      overflow: hidden;
+    }
+    .mesh-gradient::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      background:
+        radial-gradient(ellipse 600px 500px at 20% 30%, rgba(34, 211, 238, 0.08), transparent),
+        radial-gradient(ellipse 500px 600px at 75% 20%, rgba(251, 113, 133, 0.06), transparent),
+        radial-gradient(ellipse 700px 400px at 60% 80%, rgba(52, 211, 153, 0.07), transparent),
+        radial-gradient(ellipse 400px 500px at 30% 70%, rgba(139, 92, 246, 0.05), transparent);
+      animation: meshMove 25s ease-in-out infinite alternate;
+    }
+    @keyframes meshMove {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      33% { transform: translate(30px, -20px) rotate(2deg) scale(1.02); }
+      66% { transform: translate(-20px, 30px) rotate(-1deg) scale(0.98); }
+      100% { transform: translate(10px, -10px) rotate(1deg) scale(1.01); }
     }
 
     /* Animated orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.12;
-      animation: orbFloat 20s ease-in-out infinite;
+      filter: blur(100px);
+      opacity: 0.1;
+      animation: orbFloat 22s ease-in-out infinite;
     }
     .orb-1 {
-      width: 600px; height: 600px;
+      width: 500px; height: 500px;
       background: radial-gradient(circle, #22d3ee, transparent 70%);
-      top: -200px; left: -100px;
+      top: -150px; left: -100px;
       animation-delay: 0s;
     }
     .orb-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, #34d399, transparent 70%);
-      bottom: -150px; right: -100px;
-      animation-delay: -7s;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #fb7185, transparent 70%);
+      bottom: -100px; right: -80px;
+      animation-delay: -8s;
     }
     .orb-3 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, #22d3ee, transparent 70%);
-      top: 40%; right: 20%;
-      animation-delay: -14s;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, #34d399, transparent 70%);
+      top: 50%; right: 15%;
+      animation-delay: -16s;
       opacity: 0.06;
     }
 
     @keyframes orbFloat {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(30px, -40px) scale(1.05); }
-      50% { transform: translate(-20px, 20px) scale(0.95); }
-      75% { transform: translate(40px, 30px) scale(1.02); }
+      25% { transform: translate(40px, -50px) scale(1.08); }
+      50% { transform: translate(-30px, 30px) scale(0.92); }
+      75% { transform: translate(50px, 40px) scale(1.04); }
     }
 
-    /* Card hover glow */
+    /* Card glow that follows cursor */
     .card-glow {
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
     }
+    .card-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(34, 211, 238, 0.06),
+        transparent 40%
+      );
+      pointer-events: none;
+    }
+    .card-glow:hover::after { opacity: 1; }
     .card-glow:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        0 20px 40px -15px rgba(0, 0, 0, 0.5),
-        0 0 50px -10px rgba(34, 211, 238, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5), 0 0 60px -12px rgba(34, 211, 238, 0.1);
     }
 
-    /* Glass */
+    /* Glass morphism */
     .glass {
-      background: rgba(9, 9, 11, 0.7);
-      backdrop-filter: blur(20px) saturate(1.5);
-      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      background: rgba(9, 9, 11, 0.75);
+      backdrop-filter: blur(24px) saturate(1.6);
+      -webkit-backdrop-filter: blur(24px) saturate(1.6);
     }
-
     .glass-card {
-      background: rgba(24, 24, 27, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(24, 24, 27, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    /* Slide-up animation */
+    /* Slide-up reveal */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(32px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Stagger children */
     .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
-    .stagger > .reveal:nth-child(2) { transition-delay: 100ms; }
-    .stagger > .reveal:nth-child(3) { transition-delay: 200ms; }
-    .stagger > .reveal:nth-child(4) { transition-delay: 300ms; }
-    .stagger > .reveal:nth-child(5) { transition-delay: 400ms; }
-    .stagger > .reveal:nth-child(6) { transition-delay: 500ms; }
+    .stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+    .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+    .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+    .stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+    .stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+    .stagger > .reveal:nth-child(7) { transition-delay: 480ms; }
 
-    /* Subtle pulse */
+    /* Pulse */
     @keyframes subtlePulse {
-      0%, 100% { opacity: 0.6; }
+      0%, 100% { opacity: 0.5; }
       50% { opacity: 1; }
     }
-    .pulse-dot {
-      animation: subtlePulse 3s ease-in-out infinite;
-    }
+    .pulse-dot { animation: subtlePulse 2.5s ease-in-out infinite; }
 
     /* Cursor blink */
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
-    .cursor-blink {
-      animation: blink 1.1s step-end infinite;
-    }
+    .cursor-blink { animation: blink 1s step-end infinite; }
 
     /* Noise texture */
     .noise::before {
       content: '';
       position: fixed;
       inset: 0;
-      opacity: 0.015;
+      opacity: 0.018;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
     }
 
-    /* Border gradient trick */
+    /* Gradient border */
     .border-gradient {
       position: relative;
     }
@@ -185,12 +205,17 @@
       inset: 0;
       border-radius: inherit;
       padding: 1px;
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(52, 211, 153, 0.1), transparent 60%);
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(52, 211, 153, 0.08), transparent 60%);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask-composite: exclude;
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       pointer-events: none;
+    }
+
+    /* Rose gradient border for TypeDuel */
+    .border-gradient-rose::before {
+      background: linear-gradient(135deg, rgba(251, 113, 133, 0.25), rgba(244, 63, 94, 0.1), transparent 60%);
     }
 
     /* Mobile menu */
@@ -199,7 +224,6 @@
       transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .mobile-menu.open { transform: translateX(0); }
-
     .mobile-overlay {
       opacity: 0;
       pointer-events: none;
@@ -207,37 +231,22 @@
     }
     .mobile-overlay.open { opacity: 1; pointer-events: auto; }
 
-    /* Nav show/hide */
+    /* Nav */
     .nav-hidden { transform: translateY(-100%); opacity: 0; }
     .nav-visible { transform: translateY(0); opacity: 1; }
 
-    /* GitHub contribution grid */
-    .contrib-cell {
-      width: 10px; height: 10px;
-      border-radius: 2px;
-      transition: transform 0.15s ease;
-    }
-    .contrib-cell:hover { transform: scale(1.8); }
-
-    /* Tech stack pill hover */
+    /* Tech pill hover */
     .tech-pill {
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
     .tech-pill:hover {
-      background: rgba(34, 211, 238, 0.1);
-      border-color: rgba(34, 211, 238, 0.3);
-      color: #22d3ee;
+      background: rgba(34, 211, 238, 0.08);
+      border-color: rgba(34, 211, 238, 0.25);
     }
 
     /* Shimmer */
     .shimmer {
-      background: linear-gradient(
-        110deg,
-        rgba(34, 211, 238, 0) 0%,
-        rgba(34, 211, 238, 0.06) 40%,
-        rgba(52, 211, 153, 0.06) 60%,
-        rgba(52, 211, 153, 0) 100%
-      );
+      background: linear-gradient(110deg, rgba(34, 211, 238, 0) 0%, rgba(34, 211, 238, 0.04) 40%, rgba(52, 211, 153, 0.04) 60%, rgba(52, 211, 153, 0) 100%);
       background-size: 200% 100%;
       animation: shimmer 8s ease-in-out infinite;
     }
@@ -246,28 +255,81 @@
       100% { background-position: -200% 0; }
     }
 
-    /* Typing animation */
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    .typing-text {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid rgba(34, 211, 238, 0.6);
-      animation: typing 2.5s steps(40) forwards, blink 1.1s step-end infinite;
-      width: 0;
-    }
-
-    /* Glow line */
+    /* Glow divider */
     .glow-line {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.4), rgba(52, 211, 153, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.35), rgba(52, 211, 153, 0.35), transparent);
     }
 
-    /* Featured card special */
+    /* Featured card backgrounds */
     .featured-card {
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.03), rgba(24, 24, 27, 0.5), rgba(52, 211, 153, 0.03));
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.02), rgba(24, 24, 27, 0.5), rgba(52, 211, 153, 0.02));
+    }
+    .featured-card-rose {
+      background: linear-gradient(135deg, rgba(251, 113, 133, 0.03), rgba(24, 24, 27, 0.5), rgba(244, 63, 94, 0.02));
+    }
+
+    /* Battle HUD pulse for HP bars */
+    .hud-bar {
+      animation: hpPulse 3s ease-in-out infinite;
+    }
+    @keyframes hpPulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; }
+    }
+
+    /* Dot grid pattern */
+    .dot-grid {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Section gradient overlays */
+    .section-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    /* Tag with colored dot */
+    .tag-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Smooth link underline */
+    .link-underline {
+      position: relative;
+    }
+    .link-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s ease;
+    }
+    .link-underline:hover::after {
+      width: 100%;
+    }
+
+    /* Typing cursor for hero */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: #22d3ee;
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
     }
   </style>
   <script type="application/ld+json">
@@ -289,15 +351,15 @@
 
   <!-- ═══════════════════ NAVBAR ═══════════════════ -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-hidden">
-    <div class="glass border-b border-zinc-800/50">
+    <div class="glass border-b border-zinc-800/40">
       <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#hero" class="text-lg font-bold tracking-tight group">
+        <a href="#hero" class="font-display text-lg font-bold tracking-tight group">
           chuds<span class="text-cyan-400 transition-colors duration-300 group-hover:text-emerald-400">.dev</span>
         </a>
         <div class="hidden md:flex items-center gap-8">
-          <a href="#about" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300">About</a>
-          <a href="#projects" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300">Projects</a>
-          <a href="#stack" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300">Stack</a>
+          <a href="#about" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300 link-underline">About</a>
+          <a href="#projects" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300 link-underline">Projects</a>
+          <a href="#stack" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors duration-300 link-underline">Stack</a>
           <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-zinc-100 transition-colors duration-300" aria-label="GitHub">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
@@ -315,7 +377,7 @@
   <div id="mobileOverlay" class="fixed inset-0 z-40 bg-black/60 mobile-overlay" onclick="toggleMenu()"></div>
 
   <!-- Mobile menu -->
-  <div id="mobileMenu" class="fixed top-0 right-0 bottom-0 z-50 w-72 mobile-menu glass border-l border-zinc-800/50">
+  <div id="mobileMenu" class="fixed top-0 right-0 bottom-0 z-50 w-72 mobile-menu glass border-l border-zinc-800/40">
     <div class="p-6">
       <div class="flex justify-end mb-10">
         <button onclick="toggleMenu()" class="text-zinc-400 hover:text-zinc-100 transition-colors p-2 -mr-2" aria-label="Close menu">
@@ -325,9 +387,9 @@
         </button>
       </div>
       <div class="flex flex-col gap-6">
-        <a href="#about" onclick="toggleMenu()" class="text-xl text-zinc-300 hover:text-zinc-100 transition-colors">About</a>
-        <a href="#projects" onclick="toggleMenu()" class="text-xl text-zinc-300 hover:text-zinc-100 transition-colors">Projects</a>
-        <a href="#stack" onclick="toggleMenu()" class="text-xl text-zinc-300 hover:text-zinc-100 transition-colors">Stack</a>
+        <a href="#about" onclick="toggleMenu()" class="text-xl font-display text-zinc-300 hover:text-zinc-100 transition-colors">About</a>
+        <a href="#projects" onclick="toggleMenu()" class="text-xl font-display text-zinc-300 hover:text-zinc-100 transition-colors">Projects</a>
+        <a href="#stack" onclick="toggleMenu()" class="text-xl font-display text-zinc-300 hover:text-zinc-100 transition-colors">Stack</a>
         <div class="h-px bg-zinc-800 my-2"></div>
         <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-zinc-400 hover:text-zinc-100 transition-colors">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -338,46 +400,49 @@
   </div>
 
   <!-- ═══════════════════ HERO ═══════════════════ -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden scanlines">
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Mesh gradient background -->
+    <div class="mesh-gradient"></div>
+
     <!-- Floating orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- Grid lines -->
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <!-- Dot grid overlay -->
+    <div class="absolute inset-0 dot-grid opacity-50"></div>
 
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
       <!-- Status badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 mb-10">
+      <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-zinc-800/80 bg-zinc-900/40 backdrop-blur-sm mb-12">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
-        <span class="text-xs font-medium text-zinc-400 tracking-wide uppercase">Building</span>
+        <span class="text-[11px] font-medium text-zinc-400 tracking-widest uppercase">Shipping code</span>
       </div>
 
       <!-- Main headline -->
-      <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6">
-        chuds<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">.dev</span>
+      <h1 class="font-display text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-extrabold tracking-tighter mb-6 leading-[0.85]">
+        chuds<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400">.dev</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 font-light mb-4 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-lg sm:text-xl md:text-2xl text-zinc-300 font-light mb-5 max-w-2xl mx-auto leading-relaxed tracking-tight">
         Premium software engineered from the basement.
       </p>
 
       <!-- Terminal tagline -->
-      <div class="inline-block mb-12">
-        <p class="text-sm sm:text-base text-zinc-500 font-mono px-4 py-2 rounded-lg border border-zinc-800/50 bg-zinc-900/30">
-          <span class="text-emerald-400/70">~</span><span class="text-zinc-600">/</span> indie builder shipping browser games, full-stack apps &amp; terminal tools<span class="cursor-blink text-cyan-400/60">_</span>
+      <div class="inline-block mb-14">
+        <p class="text-sm sm:text-base text-zinc-500 font-mono px-5 py-2.5 rounded-lg border border-zinc-800/50 bg-zinc-900/30 backdrop-blur-sm">
+          <span class="text-emerald-400/60">$</span> indie builder shipping browser games, web apps &amp; terminal tools<span class="typing-cursor"></span>
         </p>
       </div>
 
       <!-- CTA buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#projects" class="group relative inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-cyan-400/10 to-emerald-400/10 text-cyan-400 rounded-lg font-medium text-sm border border-cyan-400/20 hover:border-cyan-400/40 hover:from-cyan-400/20 hover:to-emerald-400/20 transition-all duration-300">
+        <a href="#projects" class="group relative inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-cyan-400/10 to-emerald-400/10 text-cyan-400 rounded-xl font-semibold text-sm border border-cyan-400/20 hover:border-cyan-400/40 hover:from-cyan-400/15 hover:to-emerald-400/15 transition-all duration-300">
           <span>View Projects</span>
           <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </a>
-        <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 px-8 py-3.5 text-zinc-400 rounded-lg font-medium text-sm border border-zinc-800 hover:border-zinc-700 hover:text-zinc-200 transition-all duration-300">
+        <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2.5 px-8 py-3.5 text-zinc-400 rounded-xl font-semibold text-sm border border-zinc-800 hover:border-zinc-600 hover:text-zinc-200 transition-all duration-300 bg-zinc-900/30">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           <span>@8tp</span>
           <svg class="w-3 h-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -387,23 +452,23 @@
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600">
-      <span class="text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+      <span class="text-[10px] uppercase tracking-[0.25em] font-medium">Scroll</span>
       <div class="w-px h-8 bg-gradient-to-b from-zinc-600 to-transparent"></div>
     </div>
   </section>
 
   <!-- ═══════════════════ ABOUT ═══════════════════ -->
   <section id="about" class="relative py-32 sm:py-40">
-    <div class="max-w-4xl mx-auto px-6">
+    <div class="max-w-5xl mx-auto px-6">
       <div class="reveal">
         <!-- Section label -->
         <div class="flex items-center gap-4 mb-16">
-          <span class="text-xs font-mono text-cyan-400/60 uppercase tracking-[0.25em]">01</span>
+          <span class="text-xs font-mono text-cyan-400/50 uppercase tracking-[0.3em]">01</span>
           <div class="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent"></div>
-          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.25em]">About</span>
+          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.3em]">About</span>
         </div>
 
-        <div class="grid md:grid-cols-[1fr_2fr] gap-12 md:gap-16 items-start">
+        <div class="grid md:grid-cols-[280px_1fr] gap-12 md:gap-16 items-start">
           <!-- Identity card -->
           <div class="border-gradient rounded-2xl p-6 glass-card">
             <div class="flex items-center gap-4 mb-5">
@@ -411,33 +476,41 @@
                 <img src="https://avatars.githubusercontent.com/u/79799382?s=128&v=4" alt="Hunter" class="w-full h-full object-cover rounded-xl" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\'text-lg font-bold text-cyan-400\'>H</span>'">
               </div>
               <div>
-                <p class="font-semibold text-zinc-100">Hunter M.</p>
+                <p class="font-display font-bold text-zinc-100">Hunter M.</p>
                 <p class="text-sm text-zinc-500 font-mono">@8tp</p>
               </div>
             </div>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">Indie Dev</span>
-              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">Full Stack</span>
-              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">Systems</span>
-              <span class="px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">macOS</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">
+                <span class="tag-dot bg-cyan-400"></span>Indie Dev
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">
+                <span class="tag-dot bg-emerald-400"></span>Full Stack
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">
+                <span class="tag-dot bg-orange-400"></span>Systems
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium rounded-md bg-zinc-800/80 text-zinc-400 border border-zinc-700/50">
+                <span class="tag-dot bg-violet-400"></span>macOS
+              </span>
             </div>
           </div>
 
           <!-- Bio -->
           <div>
-            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6 leading-tight">
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Indie builder with a bias toward
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">stuff that actually works</span>
             </h2>
             <div class="space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                I ship browser games, full-stack web apps, terminal tools, and macOS utilities. If it can run in a browser, a terminal, or a menu bar — I've probably built one.
+                I ship browser games, full-stack web apps, terminal tools, and macOS utilities. If it can run in a browser, a terminal, or a menu bar &mdash; I've probably built one.
               </p>
               <p>
                 Currently obsessing over Rust TUIs, real-time multiplayer, and making system tools look beautiful. Everything is open source.
               </p>
-              <p class="text-zinc-500 text-sm font-mono shimmer rounded-lg py-3 px-4 border border-zinc-800/50">
-                Philosophy: if it's worth building, it's worth over-engineering at 2 AM.
+              <p class="text-zinc-500 text-sm font-mono shimmer rounded-xl py-3.5 px-5 border border-zinc-800/50">
+                philosophy: if it's worth building, it's worth over-engineering at 2 AM.
               </p>
             </div>
           </div>
@@ -451,26 +524,129 @@
 
   <!-- ═══════════════════ PROJECTS ═══════════════════ -->
   <section id="projects" class="relative py-32 sm:py-40">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/[0.015] to-transparent"></div>
+    <div class="section-glow bg-cyan-400 left-0 top-1/4"></div>
+    <div class="section-glow bg-rose-400 right-0 top-2/3"></div>
 
     <div class="relative max-w-6xl mx-auto px-6">
       <!-- Section label -->
       <div class="reveal">
         <div class="flex items-center gap-4 mb-6">
-          <span class="text-xs font-mono text-cyan-400/60 uppercase tracking-[0.25em]">02</span>
+          <span class="text-xs font-mono text-cyan-400/50 uppercase tracking-[0.3em]">02</span>
           <div class="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent"></div>
-          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.25em]">Projects</span>
+          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.3em]">Projects</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
           Things I've shipped
         </h2>
         <p class="text-zinc-500 mb-16 max-w-lg">Obsessively crafted, thoroughly tested, and mostly finished.</p>
       </div>
 
-      <!-- ── Featured row (web apps with live sites) ── -->
+      <!-- ── TypeDuel Spotlight (full width) ── -->
+      <div class="reveal mb-6">
+        <article class="card-glow border-gradient border-gradient-rose rounded-2xl featured-card-rose backdrop-blur-sm overflow-hidden group relative">
+          <div class="p-7 sm:p-8 md:p-10">
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+              <div class="flex-1 max-w-2xl">
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-400/20 to-rose-400/5 flex items-center justify-center border border-rose-400/10">
+                    <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                    <span class="text-[10px] font-mono text-emerald-400/80 uppercase tracking-wider">Live</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded-full bg-rose-400/10 text-rose-400/80 border border-rose-400/15 uppercase tracking-wider">New</span>
+                </div>
+
+                <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3 text-zinc-100 group-hover:text-rose-400 transition-colors duration-300">TypeDuel</h3>
+                <p class="text-sm sm:text-base text-zinc-400 mb-6 leading-relaxed max-w-xl">
+                  Real-time multiplayer typing combat game. MonkeyType meets a fighting game &mdash; type fast, deal damage, use abilities, defeat your opponent. PvP battles with WebSocket-powered real-time sync.
+                </p>
+
+                <div class="flex flex-wrap gap-1.5 mb-7">
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">TypeScript</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">React</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Vite</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Tailwind</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">WebSocket</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Zustand</span>
+                </div>
+
+                <div class="flex gap-4">
+                  <a href="https://duel.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-rose-400 hover:text-rose-300 transition-colors duration-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                    duel.chuds.dev
+                  </a>
+                  <a href="https://github.com/8tp/typeduel" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-rose-400 transition-colors duration-300">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Source
+                  </a>
+                </div>
+              </div>
+
+              <!-- Mini battle HUD mockup (decorative) -->
+              <div class="hidden lg:block w-72 flex-shrink-0 pointer-events-none select-none">
+                <div class="rounded-xl border border-rose-400/10 bg-zinc-900/60 p-5 space-y-4">
+                  <!-- VS header -->
+                  <div class="flex items-center justify-center gap-3 mb-1">
+                    <span class="text-[10px] font-mono text-cyan-400/70 uppercase tracking-wider">Player 1</span>
+                    <span class="font-display font-extrabold text-rose-400/40 text-sm">VS</span>
+                    <span class="text-[10px] font-mono text-rose-400/70 uppercase tracking-wider">Player 2</span>
+                  </div>
+
+                  <!-- Player 1 -->
+                  <div class="space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] font-mono text-zinc-500">HP</span>
+                      <span class="text-[10px] font-mono text-cyan-400/60">92 WPM</span>
+                    </div>
+                    <div class="h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+                      <div class="h-full rounded-full bg-gradient-to-r from-cyan-400/80 to-cyan-400/40 w-[72%] transition-all"></div>
+                    </div>
+                  </div>
+
+                  <!-- Player 2 -->
+                  <div class="space-y-1.5">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] font-mono text-zinc-500">HP</span>
+                      <span class="text-[10px] font-mono text-rose-400/60">85 WPM</span>
+                    </div>
+                    <div class="h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+                      <div class="h-full rounded-full bg-gradient-to-r from-rose-400/80 to-rose-400/40 w-[54%] transition-all"></div>
+                    </div>
+                  </div>
+
+                  <!-- Typing prompt -->
+                  <div class="pt-2 border-t border-zinc-800/60">
+                    <p class="text-[10px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">Type:</p>
+                    <p class="text-xs font-mono leading-relaxed">
+                      <span class="text-emerald-400/70">the quick brown</span><span class="text-zinc-400"> fox jumps</span><span class="text-zinc-600"> over the lazy dog</span><span class="cursor-blink text-rose-400/60">|</span>
+                    </p>
+                  </div>
+
+                  <!-- Abilities -->
+                  <div class="flex gap-2 pt-1">
+                    <div class="flex-1 rounded-md border border-zinc-800/60 bg-zinc-800/30 py-1.5 text-center">
+                      <span class="text-[9px] font-mono text-rose-400/50 uppercase">Shield</span>
+                    </div>
+                    <div class="flex-1 rounded-md border border-zinc-800/60 bg-zinc-800/30 py-1.5 text-center">
+                      <span class="text-[9px] font-mono text-rose-400/50 uppercase">Blind</span>
+                    </div>
+                    <div class="flex-1 rounded-md border border-zinc-800/60 bg-zinc-800/30 py-1.5 text-center">
+                      <span class="text-[9px] font-mono text-rose-400/50 uppercase">Freeze</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Featured row (HudAim + Coup) ── -->
       <div class="grid md:grid-cols-2 gap-6 mb-6 stagger">
 
-        <!-- HudAim (Featured) -->
+        <!-- HudAim -->
         <article class="reveal card-glow border-gradient rounded-2xl featured-card backdrop-blur-sm overflow-hidden group">
           <div class="p-7">
             <div class="flex items-start justify-between mb-5">
@@ -483,7 +659,7 @@
               </div>
             </div>
 
-            <h3 class="text-xl font-bold mb-2 text-zinc-100 group-hover:text-cyan-400 transition-colors duration-300">HudAim</h3>
+            <h3 class="font-display text-xl font-bold mb-2 text-zinc-100 group-hover:text-cyan-400 transition-colors duration-300">HudAim</h3>
             <p class="text-sm text-zinc-400 mb-5 leading-relaxed">Browser-based aim training platform with 6 game modes, 60 FPS replay system, LAN leaderboards, and HMAC-SHA256 anti-cheat.</p>
 
             <div class="flex flex-wrap gap-1.5 mb-6">
@@ -494,7 +670,7 @@
             </div>
 
             <div class="flex gap-3">
-              <a href="https://aim.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors duration-300">
+              <a href="https://aim.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors duration-300">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
                 aim.chuds.dev
               </a>
@@ -506,7 +682,7 @@
           </div>
         </article>
 
-        <!-- Coup (Featured) -->
+        <!-- Coup -->
         <article class="reveal card-glow border-gradient rounded-2xl featured-card backdrop-blur-sm overflow-hidden group">
           <div class="p-7">
             <div class="flex items-start justify-between mb-5">
@@ -519,7 +695,7 @@
               </div>
             </div>
 
-            <h3 class="text-xl font-bold mb-2 text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300">Coup</h3>
+            <h3 class="font-display text-xl font-bold mb-2 text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300">Coup</h3>
             <p class="text-sm text-zinc-400 mb-5 leading-relaxed">Real-time multiplayer bluffing card game with bots, room codes, and mobile-friendly play. No install, no accounts.</p>
 
             <div class="flex flex-wrap gap-1.5 mb-6">
@@ -530,7 +706,7 @@
             </div>
 
             <div class="flex gap-3">
-              <a href="https://coup.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400 hover:text-emerald-300 transition-colors duration-300">
+              <a href="https://coup.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors duration-300">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
                 coup.chuds.dev
               </a>
@@ -544,7 +720,7 @@
       </div>
 
       <!-- ── CLI / TUI / Native grid ── -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
 
         <!-- TideWatcher -->
         <article class="reveal card-glow border-gradient rounded-2xl glass-card overflow-hidden group">
@@ -555,7 +731,7 @@
               </div>
               <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Rust TUI</span>
             </div>
-            <h3 class="text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-orange-400 transition-colors duration-300">TideWatcher</h3>
+            <h3 class="font-display text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-orange-400 transition-colors duration-300">TideWatcher</h3>
             <p class="text-xs text-zinc-400 mb-4 leading-relaxed">System monitor with tide-inspired live charts, process views, and theme-aware ASCII scenes.</p>
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Rust</span>
@@ -577,7 +753,7 @@
               </div>
               <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Rust TUI</span>
             </div>
-            <h3 class="text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300">ghgarden</h3>
+            <h3 class="font-display text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300">ghgarden</h3>
             <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Beautiful GitHub contribution visualizer with heatmaps, streak stats, language breakdowns, and 6 color themes.</p>
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Rust</span>
@@ -599,8 +775,8 @@
               </div>
               <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">Go TUI</span>
             </div>
-            <h3 class="text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-sky-400 transition-colors duration-300">netmap</h3>
-            <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Visual network topology mapper and scanner — discover devices, scan ports, measure latency.</p>
+            <h3 class="font-display text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-sky-400 transition-colors duration-300">netmap</h3>
+            <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Visual network topology mapper and scanner &mdash; discover devices, scan ports, measure latency.</p>
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Go</span>
               <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Bubble Tea</span>
@@ -621,7 +797,7 @@
               </div>
               <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">macOS</span>
             </div>
-            <h3 class="text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-violet-400 transition-colors duration-300">LiteStats</h3>
+            <h3 class="font-display text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-violet-400 transition-colors duration-300">LiteStats</h3>
             <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Lightweight menu bar app for real-time CPU, RAM, storage, battery, and temperature monitoring.</p>
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Swift</span>
@@ -629,6 +805,52 @@
               <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">IOKit</span>
             </div>
             <a href="https://github.com/8tp/LiteStats" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-violet-400 transition-colors duration-300">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- ScreenCap -->
+        <article class="reveal card-glow border-gradient rounded-2xl glass-card overflow-hidden group">
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-400/20 to-blue-400/5 flex items-center justify-center border border-blue-400/10">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/></svg>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">macOS</span>
+            </div>
+            <h3 class="font-display text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-blue-400 transition-colors duration-300">ScreenCap</h3>
+            <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Free, native macOS screenshot & annotation app. Area/window/scrolling capture, screen recording, OCR, GIF export, and color picker.</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Swift</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">SwiftUI</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Vision</span>
+            </div>
+            <a href="https://github.com/8tp/ScreenCap" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-blue-400 transition-colors duration-300">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- Recopy -->
+        <article class="reveal card-glow border-gradient rounded-2xl glass-card overflow-hidden group">
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-400/20 to-amber-400/5 flex items-center justify-center border border-amber-400/10">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"/></svg>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">macOS</span>
+            </div>
+            <h3 class="font-display text-lg font-bold mb-1.5 text-zinc-100 group-hover:text-amber-400 transition-colors duration-300">Recopy</h3>
+            <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Native macOS menu bar clipboard manager. Zero dependencies, fully offline, built with SwiftData.</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Swift</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">SwiftUI</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">SwiftData</span>
+            </div>
+            <a href="https://github.com/8tp/Recopy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-amber-400 transition-colors duration-300">
               <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
               View on GitHub
             </a>
@@ -646,46 +868,46 @@
     <div class="max-w-4xl mx-auto px-6">
       <div class="reveal">
         <div class="flex items-center gap-4 mb-16">
-          <span class="text-xs font-mono text-cyan-400/60 uppercase tracking-[0.25em]">03</span>
+          <span class="text-xs font-mono text-cyan-400/50 uppercase tracking-[0.3em]">03</span>
           <div class="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent"></div>
-          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.25em]">Stack</span>
+          <span class="text-xs font-mono text-zinc-600 uppercase tracking-[0.3em]">Stack</span>
         </div>
 
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-12">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-12">
           Tools of the trade
         </h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">TypeScript</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">TypeScript</p>
             <p class="text-[10px] text-zinc-500 font-mono">Web / Full Stack</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">React</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">React</p>
             <p class="text-[10px] text-zinc-500 font-mono">UI Framework</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">Next.js</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">Next.js</p>
             <p class="text-[10px] text-zinc-500 font-mono">Full Stack</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">Tailwind CSS</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">Tailwind CSS</p>
             <p class="text-[10px] text-zinc-500 font-mono">Styling</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">Node.js</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">Node.js</p>
             <p class="text-[10px] text-zinc-500 font-mono">Backend</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">Rust</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">Rust</p>
             <p class="text-[10px] text-zinc-500 font-mono">Systems / TUI</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">Go</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">Go</p>
             <p class="text-[10px] text-zinc-500 font-mono">CLI / Networking</p>
           </div>
-          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default">
-            <p class="text-sm font-semibold text-zinc-200 mb-1">Swift</p>
+          <div class="tech-pill border-gradient rounded-xl p-4 glass-card text-center cursor-default group">
+            <p class="text-sm font-display font-bold text-zinc-200 mb-1 group-hover:text-cyan-400 transition-colors">Swift</p>
             <p class="text-[10px] text-zinc-500 font-mono">macOS Native</p>
           </div>
         </div>
@@ -694,11 +916,11 @@
   </section>
 
   <!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer class="relative border-t border-zinc-800/50">
+  <footer class="relative border-t border-zinc-800/40">
     <div class="max-w-6xl mx-auto px-6 py-16">
       <div class="flex flex-col md:flex-row items-center justify-between gap-8">
         <div class="text-center md:text-left">
-          <a href="#hero" class="text-lg font-bold tracking-tight inline-block mb-3">
+          <a href="#hero" class="font-display text-lg font-bold tracking-tight inline-block mb-3">
             chuds<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">.dev</span>
           </a>
           <p class="text-sm text-zinc-600">&copy; 2026 chuds.dev &mdash; All rights reserved</p>
@@ -719,19 +941,16 @@
   <script>
     // ── Navbar show/hide on scroll ──
     const navbar = document.getElementById('navbar');
-    let lastScrollY = 0;
     let ticking = false;
 
     function updateNav() {
-      const scrollY = window.scrollY;
-      if (scrollY > 100) {
+      if (window.scrollY > 100) {
         navbar.classList.remove('nav-hidden');
         navbar.classList.add('nav-visible');
       } else {
         navbar.classList.remove('nav-visible');
         navbar.classList.add('nav-hidden');
       }
-      lastScrollY = scrollY;
       ticking = false;
     }
 
@@ -758,8 +977,6 @@
     menuBtn.addEventListener('click', toggleMenu);
 
     // ── Scroll reveal ──
-    const revealEls = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -767,12 +984,9 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -60px 0px'
-    });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
 
-    revealEls.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ── Smooth scroll for anchor links ──
     document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -782,6 +996,17 @@
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth' });
         }
+      });
+    });
+
+    // ── Card cursor-following glow ──
+    document.querySelectorAll('.card-glow').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
       });
     });
   </script>
