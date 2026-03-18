@@ -218,6 +218,11 @@
       background: linear-gradient(135deg, rgba(251, 113, 133, 0.25), rgba(244, 63, 94, 0.1), transparent 60%);
     }
 
+    /* Amber gradient border for AntMaze */
+    .border-gradient-amber::before {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(217, 119, 6, 0.1), transparent 60%);
+    }
+
     /* Mobile menu */
     .mobile-menu {
       transform: translateX(100%);
@@ -267,6 +272,9 @@
     }
     .featured-card-rose {
       background: linear-gradient(135deg, rgba(251, 113, 133, 0.03), rgba(24, 24, 27, 0.5), rgba(244, 63, 94, 0.02));
+    }
+    .featured-card-amber {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.03), rgba(24, 24, 27, 0.5), rgba(217, 119, 6, 0.02));
     }
 
     /* Battle HUD pulse for HP bars */
@@ -541,99 +549,101 @@
         <p class="text-zinc-500 mb-16 max-w-lg">Obsessively crafted, thoroughly tested, and mostly finished.</p>
       </div>
 
-      <!-- ── TypeDuel Spotlight (full width) ── -->
+      <!-- ── AntMaze Spotlight (full width) ── -->
       <div class="reveal mb-6">
-        <article class="card-glow border-gradient border-gradient-rose rounded-2xl featured-card-rose backdrop-blur-sm overflow-hidden group relative">
+        <article class="card-glow border-gradient border-gradient-amber rounded-2xl featured-card-amber backdrop-blur-sm overflow-hidden group relative">
           <div class="p-7 sm:p-8 md:p-10">
             <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
               <div class="flex-1 max-w-2xl">
                 <div class="flex items-center gap-3 mb-5">
-                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-400/20 to-rose-400/5 flex items-center justify-center border border-rose-400/10">
-                    <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-400/5 flex items-center justify-center border border-amber-400/10">
+                    <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 12.75c1.148 0 2.278.08 3.383.237 1.037.146 1.866.966 1.866 2.013 0 3.728-2.35 6.75-5.25 6.75S6.75 18.728 6.75 15c0-1.046.83-1.867 1.866-2.013A24.204 24.204 0 0112 12.75zm0 0c2.883 0 5.647.508 8.207 1.44a23.91 23.91 0 01-1.152 6.06M12 12.75c-2.883 0-5.647.508-8.208 1.44.125 2.104.52 4.136 1.153 6.06M12 12.75a2.25 2.25 0 002.248-2.354M12 12.75a2.25 2.25 0 01-2.248-2.354M12 8.25c.995 0 1.971-.08 2.922-.236.403-.066.74-.358.795-.762a3.778 3.778 0 00-.399-2.25M12 8.25c-.995 0-1.97-.08-2.922-.236-.402-.066-.74-.358-.795-.762a3.734 3.734 0 01.4-2.253M12 8.25a2.25 2.25 0 00-2.248 2.146M12 8.25a2.25 2.25 0 012.248 2.146M8.683 5a6.032 6.032 0 01-1.155-1.002c.07-.63.27-1.222.574-1.747m.581 2.749A3.75 3.75 0 0112 3.75c1.274 0 2.404.634 3.088 1.603m-4.405.347c-.025.338-.025.68 0 1.02m4.405-1.367c.481.45.852.994 1.079 1.603m-1.079-1.603A24.085 24.085 0 0112 5.25c-1.29 0-2.553.106-3.783.31"/></svg>
                   </div>
                   <div class="flex items-center gap-2.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
                     <span class="text-[10px] font-mono text-emerald-400/80 uppercase tracking-wider">Live</span>
                   </div>
-                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded-full bg-rose-400/10 text-rose-400/80 border border-rose-400/15 uppercase tracking-wider">New</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded-full bg-amber-400/10 text-amber-400/80 border border-amber-400/15 uppercase tracking-wider">New</span>
                 </div>
 
-                <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3 text-zinc-100 group-hover:text-rose-400 transition-colors duration-300">TypeDuel</h3>
+                <h3 class="font-display text-2xl sm:text-3xl font-bold mb-3 text-zinc-100 group-hover:text-amber-400 transition-colors duration-300">AntMaze</h3>
                 <p class="text-sm sm:text-base text-zinc-400 mb-6 leading-relaxed max-w-xl">
-                  Real-time multiplayer typing combat game. MonkeyType meets a fighting game &mdash; type fast, deal damage, use abilities, defeat your opponent. PvP battles with WebSocket-powered real-time sync.
+                  Perpetual-motion maze game &mdash; the ant never stops moving. Steer through procedurally generated mazes that scale from 7&times;7 to 21&times;21. LBP-inspired procedural soundtrack via Web Audio API, zero dependencies, ~10 KB gzipped.
                 </p>
 
                 <div class="flex flex-wrap gap-1.5 mb-7">
                   <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">TypeScript</span>
-                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">React</span>
                   <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Vite</span>
-                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Tailwind</span>
-                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">WebSocket</span>
-                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Zustand</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Canvas 2D</span>
+                  <span class="px-2.5 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Web Audio</span>
                 </div>
 
                 <div class="flex gap-4">
-                  <a href="https://duel.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-rose-400 hover:text-rose-300 transition-colors duration-300">
+                  <a href="https://ant.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors duration-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-                    duel.chuds.dev
+                    ant.chuds.dev
                   </a>
-                  <a href="https://github.com/8tp/typeduel" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-rose-400 transition-colors duration-300">
+                  <a href="https://github.com/8tp/AntMaze" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-amber-400 transition-colors duration-300">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                     Source
                   </a>
                 </div>
               </div>
 
-              <!-- Mini battle HUD mockup (decorative) -->
+              <!-- Mini maze preview (decorative) -->
               <div class="hidden lg:block w-72 flex-shrink-0 pointer-events-none select-none">
-                <div class="rounded-xl border border-rose-400/10 bg-zinc-900/60 p-5 space-y-4">
-                  <!-- VS header -->
-                  <div class="flex items-center justify-center gap-3 mb-1">
-                    <span class="text-[10px] font-mono text-cyan-400/70 uppercase tracking-wider">Player 1</span>
-                    <span class="font-display font-extrabold text-rose-400/40 text-sm">VS</span>
-                    <span class="text-[10px] font-mono text-rose-400/70 uppercase tracking-wider">Player 2</span>
+                <div class="rounded-xl border border-amber-400/10 bg-zinc-900/60 p-5 space-y-4">
+                  <!-- HUD header -->
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[10px] font-mono text-amber-400/70 uppercase tracking-wider">Level 5</span>
+                    <span class="text-[10px] font-mono text-zinc-500">15&times;15</span>
                   </div>
 
-                  <!-- Player 1 -->
-                  <div class="space-y-1.5">
-                    <div class="flex justify-between items-center">
-                      <span class="text-[10px] font-mono text-zinc-500">HP</span>
-                      <span class="text-[10px] font-mono text-cyan-400/60">92 WPM</span>
-                    </div>
-                    <div class="h-1.5 rounded-full bg-zinc-800 overflow-hidden">
-                      <div class="h-full rounded-full bg-gradient-to-r from-cyan-400/80 to-cyan-400/40 w-[72%] transition-all"></div>
-                    </div>
+                  <!-- Maze visualization -->
+                  <div class="rounded-lg overflow-hidden border border-zinc-800/40">
+                    <svg viewBox="0 0 140 140" class="w-full block" style="background:rgba(9,9,11,0.6)">
+                      <!-- Maze walls -->
+                      <rect x="6" y="6" width="128" height="128" rx="3" fill="none" stroke="rgba(161,98,7,0.2)" stroke-width="1.5"/>
+                      <!-- Horizontal walls -->
+                      <line x1="6" y1="32" x2="38" y2="32" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="58" y1="32" x2="84" y2="32" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="108" y1="32" x2="134" y2="32" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="32" y1="58" x2="58" y2="58" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="84" y1="58" x2="108" y2="58" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="6" y1="84" x2="32" y2="84" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="58" y1="84" x2="84" y2="84" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="32" y1="108" x2="84" y2="108" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="108" y1="108" x2="134" y2="108" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <!-- Vertical walls -->
+                      <line x1="38" y1="6" x2="38" y2="32" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="84" y1="6" x2="84" y2="32" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="108" y1="32" x2="108" y2="58" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="32" y1="58" x2="32" y2="84" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="84" y1="58" x2="84" y2="84" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="58" y1="84" x2="58" y2="108" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <line x1="108" y1="84" x2="108" y2="108" stroke="rgba(161,98,7,0.18)" stroke-width="1.5"/>
+                      <!-- Ant trail -->
+                      <path d="M18 18 L18 46 L46 46 L46 70 L70 70 L70 46 L96 46 L96 70 L120 70 L120 96 L96 96" stroke="rgba(251,191,36,0.07)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                      <!-- Goal -->
+                      <rect x="116" y="116" width="14" height="14" rx="3" fill="rgba(52,211,153,0.2)" stroke="rgba(52,211,153,0.35)" stroke-width="1"/>
+                      <!-- Ant (current position) -->
+                      <circle cx="96" cy="96" r="6" fill="rgba(251,191,36,0.1)"/>
+                      <circle cx="96" cy="96" r="3.5" fill="rgba(251,191,36,0.6)"/>
+                      <!-- Start -->
+                      <circle cx="18" cy="18" r="2.5" fill="rgba(251,191,36,0.2)"/>
+                    </svg>
                   </div>
 
-                  <!-- Player 2 -->
-                  <div class="space-y-1.5">
-                    <div class="flex justify-between items-center">
-                      <span class="text-[10px] font-mono text-zinc-500">HP</span>
-                      <span class="text-[10px] font-mono text-rose-400/60">85 WPM</span>
-                    </div>
-                    <div class="h-1.5 rounded-full bg-zinc-800 overflow-hidden">
-                      <div class="h-full rounded-full bg-gradient-to-r from-rose-400/80 to-rose-400/40 w-[54%] transition-all"></div>
-                    </div>
-                  </div>
-
-                  <!-- Typing prompt -->
-                  <div class="pt-2 border-t border-zinc-800/60">
-                    <p class="text-[10px] font-mono text-zinc-600 mb-1.5 uppercase tracking-wider">Type:</p>
-                    <p class="text-xs font-mono leading-relaxed">
-                      <span class="text-emerald-400/70">the quick brown</span><span class="text-zinc-400"> fox jumps</span><span class="text-zinc-600"> over the lazy dog</span><span class="cursor-blink text-rose-400/60">|</span>
-                    </p>
-                  </div>
-
-                  <!-- Abilities -->
+                  <!-- Game HUD stats -->
                   <div class="flex gap-2 pt-1">
                     <div class="flex-1 rounded-md border border-zinc-800/60 bg-zinc-800/30 py-1.5 text-center">
-                      <span class="text-[9px] font-mono text-rose-400/50 uppercase">Shield</span>
+                      <span class="text-[9px] font-mono text-amber-400/50 uppercase">Score 1,840</span>
                     </div>
                     <div class="flex-1 rounded-md border border-zinc-800/60 bg-zinc-800/30 py-1.5 text-center">
-                      <span class="text-[9px] font-mono text-rose-400/50 uppercase">Blind</span>
+                      <span class="text-[9px] font-mono text-emerald-400/50 uppercase">Streak 1.5x</span>
                     </div>
                     <div class="flex-1 rounded-md border border-zinc-800/60 bg-zinc-800/30 py-1.5 text-center">
-                      <span class="text-[9px] font-mono text-rose-400/50 uppercase">Freeze</span>
+                      <span class="text-[9px] font-mono text-zinc-500 uppercase">0:47</span>
                     </div>
                   </div>
                 </div>
@@ -643,8 +653,8 @@
         </article>
       </div>
 
-      <!-- ── Featured row (HudAim + Coup) ── -->
-      <div class="grid md:grid-cols-2 gap-6 mb-6 stagger">
+      <!-- ── Featured row (HudAim + Coup + TypeDuel) ── -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 stagger">
 
         <!-- HudAim -->
         <article class="reveal card-glow border-gradient rounded-2xl featured-card backdrop-blur-sm overflow-hidden group">
@@ -711,6 +721,42 @@
                 coup.chuds.dev
               </a>
               <a href="https://github.com/8tp/Coup" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-emerald-400 transition-colors duration-300">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- TypeDuel -->
+        <article class="reveal card-glow border-gradient border-gradient-rose rounded-2xl featured-card-rose backdrop-blur-sm overflow-hidden group">
+          <div class="p-7">
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-400/20 to-rose-400/5 flex items-center justify-center border border-rose-400/10">
+                <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                <span class="text-[10px] font-mono text-emerald-400/80 uppercase tracking-wider">Live</span>
+              </div>
+            </div>
+
+            <h3 class="font-display text-xl font-bold mb-2 text-zinc-100 group-hover:text-rose-400 transition-colors duration-300">TypeDuel</h3>
+            <p class="text-sm text-zinc-400 mb-5 leading-relaxed">Real-time multiplayer typing combat. Type fast, deal damage, use abilities, defeat your opponent.</p>
+
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">TypeScript</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">React</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">WebSocket</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-800/80 text-zinc-500 border border-zinc-700/40">Zustand</span>
+            </div>
+
+            <div class="flex gap-3">
+              <a href="https://duel.chuds.dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-400 hover:text-rose-300 transition-colors duration-300">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                duel.chuds.dev
+              </a>
+              <a href="https://github.com/8tp/typeduel" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-rose-400 transition-colors duration-300">
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 Source
               </a>
