@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────
+   Catppuccin Frappé palette as design tokens
+   https://github.com/catppuccin/catppuccin
+   ─────────────────────────────────────────────────────────────── */
+@theme {
+  --color-rosewater: #f2d5cf;
+  --color-flamingo: #eebebe;
+  --color-pink: #f4b8e4;
+  --color-mauve: #ca9ee6;
+  --color-red: #e78284;
+  --color-maroon: #ea999c;
+  --color-peach: #ef9f76;
+  --color-yellow: #e5c890;
+  --color-green: #a6d189;
+  --color-teal: #81c8be;
+  --color-sky: #99d1db;
+  --color-sapphire: #85c1dc;
+  --color-blue: #8caaee;
+  --color-lavender: #babbf1;
+
+  --color-text: #c6d0f5;
+  --color-subtext1: #b5bfe2;
+  --color-subtext0: #a5adce;
+  --color-overlay2: #949cbb;
+  --color-overlay1: #838ba7;
+  --color-overlay0: #737994;
+  --color-surface2: #626880;
+  --color-surface1: #51576d;
+  --color-surface0: #414559;
+  --color-base: #303446;
+  --color-mantle: #292c3c;
+  --color-crust: #232634;
+
+  --font-display: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  background-color: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, color-mix(in oklab, var(--color-mauve) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 60% at 100% 100%, color-mix(in oklab, var(--color-blue) 6%, transparent), transparent 70%),
+    var(--color-base);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-mantle); }
+::-webkit-scrollbar-thumb { background: var(--color-surface1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-surface2); }
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-mauve) 35%, transparent);
+  color: var(--color-text);
+}
+
+/* Reusable section card — frosted panel with subtle gradient border */
+.side {
+  background-color: color-mix(in oklab, var(--color-mantle) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-surface0) 80%, transparent);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 0 color-mix(in oklab, white 4%, transparent) inset,
+              0 12px 32px -16px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle wallpaper grain — adds tactile depth without competing */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  z-index: 100;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Project tile hover */
+.tile:hover {
+  border-color: color-mix(in oklab, var(--color-peach) 50%, transparent) !important;
+  transform: translateY(-2px);
+}
+.tile {
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+/* Tag pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  background: color-mix(in oklab, var(--color-surface0) 40%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-surface1) 60%, transparent);
+  color: var(--color-subtext0);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* Anchor reset for in-page nav */
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--color-peach); }
+
+/* Animated entrance on first paint */
+@starting-style {
+  .reveal {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+.reveal {
+  transition:
+    opacity 350ms ease,
+    transform 350ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}

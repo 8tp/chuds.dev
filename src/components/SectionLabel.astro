@@ -1,0 +1,16 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  id?: string;
+}
+const { index, label, id } = Astro.props;
+---
+
+<div class="flex items-center gap-3 mb-3" id={id}>
+  <span class="text-xs font-mono text-peach">{index}</span>
+  <span class="font-display text-lg font-semibold tracking-tight text-text">
+    {label}
+  </span>
+  <span class="h-px flex-1 bg-gradient-to-r from-surface1 to-transparent"></span>
+</div>

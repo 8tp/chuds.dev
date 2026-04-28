@@ -1,0 +1,30 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+import { site } from "~/data/site";
+
+const groups = [
+  { label: "editors", items: site.tools.editors },
+  { label: "languages", items: site.tools.languages },
+  { label: "frameworks", items: site.tools.frameworks },
+  { label: "infrastructure", items: site.tools.infra },
+];
+---
+
+<section class="reveal" id="tools" style="--reveal-delay: 80ms">
+  <SectionLabel index="02" label="tools" />
+  <div class="side space-y-4">
+    {groups.map((g) => (
+      <div>
+        <div class="flex items-center gap-2 text-overlay1 text-sm font-medium mb-2">
+          <span class="font-mono text-xs text-peach">›</span>
+          <span>{g.label}</span>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          {g.items.map((item) => (
+            <span class="pill">{item}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

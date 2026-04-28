@@ -1,0 +1,62 @@
+---
+import "~/styles/global.css";
+import { site } from "~/data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).toString();
+---
+
+<!doctype html>
+<html lang="en" data-theme="frappe">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author.name} />
+    <meta name="theme-color" content="#303446" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${site.url}/og.png`} />
+    <meta property="og:site_name" content={site.title} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site.url}/og.png`} />
+
+    <!-- Inter + JetBrains Mono — sans + mono pair, both with full weight ranges -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: site.author.name,
+      url: site.url,
+      sameAs: site.socials.map((s) => s.url),
+    })} />
+  </head>
+  <body class="grain">
+    <main class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20">
+      <slot />
+    </main>
+  </body>
+</html>

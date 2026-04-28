@@ -1,0 +1,21 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+import ProjectCard from "./ProjectCard.svelte";
+import { featured, rest } from "~/data/projects";
+---
+
+<section class="reveal" id="projects" style="--reveal-delay: 160ms">
+  <SectionLabel index="03" label="projects" />
+
+  <!-- Featured row — 2-up on lg+, 1-up on smaller -->
+  {featured.length > 0 && (
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+      {featured.map((p) => <ProjectCard project={p} client:visible />)}
+    </div>
+  )}
+
+  <!-- Everything else — denser 2-up grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {rest.map((p) => <ProjectCard project={p} client:visible />)}
+  </div>
+</section>

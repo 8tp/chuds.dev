@@ -1,3 +1,11 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Astro / Node
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
