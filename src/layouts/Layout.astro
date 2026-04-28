@@ -12,7 +12,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
 ---
 
 <!doctype html>
-<html lang="en" data-theme="frappe">
+<html lang="en" data-theme="tokyonight">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -21,7 +21,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.author.name} />
-    <meta name="theme-color" content="#303446" />
+    <meta name="theme-color" content="#1a1b26" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -55,7 +55,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     })} />
   </head>
   <body class="grain">
-    <main class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20">
+    <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
       <slot />
     </main>
   </body>

@@ -2,72 +2,72 @@
 import { site } from "~/data/site";
 ---
 
-<aside class="flex flex-col items-center lg:items-start gap-5 lg:gap-6 lg:sticky lg:top-10">
-  <!-- Avatar -->
-  <a
-    href="https://github.com/8tp"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="group relative block"
-    aria-label="GitHub profile"
-  >
-    <div
-      class="absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-mauve via-blue to-peach opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-60"
-    >
+<aside class="flex flex-col items-start gap-4 lg:gap-5 lg:sticky lg:top-6">
+  <!-- Profile window: tighter than trafficlunar's, with a kitty-style title bar -->
+  <div class="win w-full" style="--win-accent: var(--color-cyan)">
+    <div class="win-title">
+      <span class="win-dots"><span></span><span></span><span></span></span>
+      <span>~/whoami</span>
     </div>
-    <img
-      src="https://avatars.githubusercontent.com/u/79799382?s=256&v=4"
-      alt={site.author.name}
-      width="160"
-      height="160"
-      class="size-32 sm:size-36 lg:size-40 rounded-full border border-surface1 ring-2 ring-mantle"
-      loading="eager"
-      decoding="async"
-    />
-    <span
-      class="absolute bottom-1 right-1 size-4 rounded-full bg-green ring-2 ring-base"
-      title="Available for chats"></span>
-  </a>
-
-  <!-- Name -->
-  <div class="text-center lg:text-left">
-    <h1 class="font-display text-2xl font-bold tracking-tight text-text">
-      chuds<span class="text-peach">.dev</span>
-    </h1>
-    <p class="mt-1 text-sm text-overlay1">@{site.author.handle} · {site.author.pronouns}</p>
-    <p class="mt-0.5 text-xs text-overlay0 font-mono">{site.author.location}</p>
+    <div class="win-body flex items-center gap-3.5">
+      <div class="relative shrink-0">
+        <img
+          src="https://avatars.githubusercontent.com/u/79799382?s=128&v=4"
+          alt={site.author.name}
+          width="56"
+          height="56"
+          class="size-14 rounded-md border border-border"
+          loading="eager"
+          decoding="async"
+        />
+        <span
+          class="absolute -bottom-1 -right-1 size-3 rounded-full bg-green ring-2 ring-panel"
+          title="Available for chats"></span>
+      </div>
+      <div class="min-w-0">
+        <p class="font-display font-bold text-fg text-sm leading-tight truncate">
+          {site.author.name}
+        </p>
+        <p class="text-xs text-fg-muted font-mono">@{site.author.handle}</p>
+        <p class="text-[10px] text-comment font-mono mt-0.5">
+          {site.author.pronouns} · {site.author.location}
+        </p>
+      </div>
+    </div>
   </div>
 
-  <!-- Section nav (visible on lg+) -->
+  <!-- Section nav — terminal-prompt styling instead of trafficlunar's "01 / xxx" -->
   <nav
-    class="hidden lg:flex flex-col gap-1 w-full text-sm font-mono"
+    class="hidden lg:flex flex-col gap-0.5 w-full font-mono text-xs"
     aria-label="Sections"
   >
     {[
-      { label: "01 / about", href: "#about" },
-      { label: "02 / tools", href: "#tools" },
-      { label: "03 / projects", href: "#projects" },
+      { label: "about", href: "#about", n: "01" },
+      { label: "tools", href: "#tools", n: "02" },
+      { label: "projects", href: "#projects", n: "03" },
     ].map((item) => (
       <a
         href={item.href}
-        class="px-2 py-1.5 rounded-md text-overlay1 hover:bg-surface0/50 hover:text-text transition-colors"
+        class="group flex items-center gap-2 px-2 py-1.5 rounded-md text-fg-muted hover:text-fg hover:bg-elev/50 transition-colors"
       >
-        {item.label}
+        <span class="text-comment group-hover:text-magenta transition-colors">{item.n}</span>
+        <span class="text-comment">~$</span>
+        <span>cd {item.label}</span>
       </a>
     ))}
   </nav>
 
-  <!-- Socials -->
-  <div class="flex flex-row lg:flex-col gap-2 lg:gap-1.5 w-full">
+  <!-- Socials — render as command-style links -->
+  <div class="flex flex-row lg:flex-col gap-1.5 w-full">
     {site.socials.map((s) => (
       <a
         href={s.url}
         target={s.url.startsWith("http") ? "_blank" : undefined}
         rel={s.url.startsWith("http") ? "noopener noreferrer" : undefined}
-        class="flex items-center gap-2.5 px-3 py-2 rounded-md border border-surface0/60 bg-mantle/40 hover:bg-surface0/40 hover:border-surface1 transition-colors text-sm text-subtext0 hover:text-text"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md border border-border bg-bg-dark/50 hover:bg-elev/50 hover:border-magenta/60 transition-colors text-xs text-fg-dim hover:text-fg font-mono"
       >
-        <span class="size-1.5 rounded-full bg-overlay0"></span>
-        <span class="font-mono text-xs">{s.label}</span>
+        <span class="text-magenta">→</span>
+        <span class="lowercase">{s.label}</span>
       </a>
     ))}
   </div>

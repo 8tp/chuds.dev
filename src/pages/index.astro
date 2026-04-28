@@ -1,5 +1,7 @@
 ---
 import Layout from "~/layouts/Layout.astro";
+import StatusBar from "~/components/StatusBar.astro";
+import Banner from "~/components/Banner.astro";
 import Sidebar from "~/components/Sidebar.astro";
 import About from "~/components/About.astro";
 import Tools from "~/components/Tools.astro";
@@ -7,24 +9,30 @@ import Projects from "~/components/Projects.astro";
 ---
 
 <Layout>
-  <div class="grid grid-cols-1 lg:grid-cols-[14rem_1fr] gap-8 lg:gap-12">
+  <StatusBar />
+  <Banner />
+
+  <div class="grid grid-cols-1 lg:grid-cols-[15rem_1fr] gap-6 lg:gap-10">
     <Sidebar />
 
-    <div class="flex flex-col gap-8 sm:gap-10">
+    <div class="flex flex-col gap-8 sm:gap-10 min-w-0">
       <About />
       <Tools />
       <Projects />
 
-      <footer class="pt-6 mt-4 border-t border-surface0/60 text-xs text-overlay0 font-mono">
+      <footer class="pt-6 mt-2 border-t border-border/60 text-xs text-fg-muted font-mono">
         <div class="flex flex-col sm:flex-row justify-between gap-2">
-          <span>© {new Date().getFullYear()} chuds.dev — built with Astro + Svelte</span>
+          <span>
+            <span class="text-comment">$</span>
+            echo "© {new Date().getFullYear()} chuds.dev — astro + svelte, tokyonight"
+          </span>
           <a
             href="https://github.com/8tp/chuds.dev"
             target="_blank"
             rel="noopener"
-            class="hover:text-peach transition-colors"
+            class="hover:text-magenta transition-colors"
           >
-            view source ↗
+            view source →
           </a>
         </div>
       </footer>

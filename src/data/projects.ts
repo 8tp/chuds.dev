@@ -1,3 +1,14 @@
+export type Accent =
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "mint"
+  | "cyan"
+  | "blue"
+  | "magenta"
+  | "purple";
+
 export type Project = {
   /** Stable slug, also used for thumbnail filename: `/projects/<slug>.webp` */
   slug: string;
@@ -5,18 +16,8 @@ export type Project = {
   year: number;
   /** Short, single-sentence description shown on the card. */
   description: string;
-  /** Subtle accent color for the card (Catppuccin token name). */
-  accent:
-    | "peach"
-    | "mauve"
-    | "blue"
-    | "green"
-    | "teal"
-    | "sapphire"
-    | "yellow"
-    | "red"
-    | "rosewater"
-    | "lavender";
+  /** Tokyo Night accent — also passed to gpt-image-1 in the codex prompt. */
+  accent: Accent;
   source?: string;
   website?: string;
   /** Tech stack pills — keep to 3-4 max for visual balance. */
@@ -47,7 +48,7 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "Browser-based aim trainer with 6 game modes, 60 FPS replay system, LAN leaderboards and HMAC-SHA256 anti-cheat.",
-    accent: "sapphire",
+    accent: "cyan",
     source: "https://github.com/8tp/hudaim",
     website: "https://aim.chuds.dev",
     stack: ["React 19", "Tailwind", "Node/Express", "IndexedDB"],
@@ -85,7 +86,7 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "System monitor TUI with tide-inspired live charts, process views, and theme-aware ASCII scenes.",
-    accent: "peach",
+    accent: "orange",
     source: "https://github.com/8tp/tidewatcher",
     stack: ["Rust", "Ratatui"],
   },
@@ -95,7 +96,7 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "GitHub contribution visualizer in the terminal — heatmaps, streak stats, language breakdowns, 6 themes.",
-    accent: "green",
+    accent: "mint",
     source: "https://github.com/8tp/ghgarden",
     stack: ["Rust", "Ratatui"],
   },
@@ -115,7 +116,7 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "Lightweight macOS menu bar app for real-time CPU, RAM, storage, battery, and temperature.",
-    accent: "mauve",
+    accent: "magenta",
     source: "https://github.com/8tp/LiteStats",
     stack: ["Swift", "SwiftUI", "IOKit"],
   },
@@ -125,7 +126,7 @@ export const projects: Project[] = [
     year: 2025,
     description:
       "Native macOS screenshot & annotation app. Area / window / scrolling capture, screen recording, OCR, GIF export.",
-    accent: "sapphire",
+    accent: "purple",
     source: "https://github.com/8tp/ScreenCap",
     stack: ["Swift", "SwiftUI", "Vision"],
   },
@@ -143,3 +144,16 @@ export const projects: Project[] = [
 
 export const featured = projects.filter((p) => p.featured);
 export const rest = projects.filter((p) => !p.featured);
+
+/** Hex map — kept in lockstep with the @theme tokens in src/styles/global.css. */
+export const ACCENT_HEX: Record<Accent, string> = {
+  red: "#f7768e",
+  orange: "#ff9e64",
+  yellow: "#e0af68",
+  green: "#9ece6a",
+  mint: "#73daca",
+  cyan: "#7dcfff",
+  blue: "#7aa2f7",
+  magenta: "#bb9af7",
+  purple: "#9d7cd8",
+};

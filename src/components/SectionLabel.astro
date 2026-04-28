@@ -1,16 +1,21 @@
 ---
+/**
+ * Terminal-prompt-styled section header.
+ * Renders like:    ~/about $ cat about.md          ──────────────
+ */
 interface Props {
-  index: string;
-  label: string;
+  index: string;       // 01, 02, 03
+  label: string;       // about / tools / projects
+  cmd?: string;        // optional cmd shown after the prompt
   id?: string;
 }
-const { index, label, id } = Astro.props;
+const { index, label, cmd, id } = Astro.props;
 ---
 
-<div class="flex items-center gap-3 mb-3" id={id}>
-  <span class="text-xs font-mono text-peach">{index}</span>
-  <span class="font-display text-lg font-semibold tracking-tight text-text">
-    {label}
-  </span>
-  <span class="h-px flex-1 bg-gradient-to-r from-surface1 to-transparent"></span>
+<div class="flex items-baseline gap-2 mb-3 font-mono text-xs sm:text-sm" id={id}>
+  <span class="text-comment">[{index}]</span>
+  <span class="text-magenta">~/{label}</span>
+  <span class="text-fg-muted">$</span>
+  <span class="text-fg-dim">{cmd ?? `cat ${label}.md`}</span>
+  <span class="ml-2 flex-1 ascii-rule overflow-hidden">─────────────────────────────────────────────────</span>
 </div>

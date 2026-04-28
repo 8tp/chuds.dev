@@ -14,10 +14,15 @@ export const site = {
     { label: "GitHub", url: "https://github.com/8tp", id: "github" },
     { label: "Email", url: "mailto:hunter@chuds.dev", id: "mail" },
   ],
+  /**
+   * Tech stack — mirrors the legacy chuds.dev "Tools of the trade" grid.
+   * Grouped the trafficlunar way (editors / languages / frameworks / infra)
+   * but the *content* is whatever Hunter actually ships with.
+   */
   tools: {
-    editors: ["Neovim", "VS Code", "Cursor", "Xcode"],
-    languages: ["TypeScript", "Rust", "Go", "Swift", "Python"],
-    frameworks: ["React", "Next.js", "Astro", "Svelte", "Tailwind", "Ratatui", "SwiftUI"],
-    infra: ["PostgreSQL", "Redis", "Docker", "Cloudflare", "macOS"],
+    editors: ["Neovim", "Cursor", "Xcode", "kitty"],
+    languages: ["TypeScript", "Rust", "Go", "Swift"],
+    frameworks: ["React", "Next.js", "Tailwind", "Astro", "Ratatui", "SwiftUI"],
+    infra: ["Node.js", "PostgreSQL", "Docker", "Cloudflare", "macOS"],
   },
 };
