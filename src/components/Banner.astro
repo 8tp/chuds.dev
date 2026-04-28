@@ -2,12 +2,18 @@
 /**
  * Generated typography banner. The image carries the wordmark and tagline,
  * keeping the hero art direction consistent with the project thumbnails.
+ *
+ * The `?v=` query is a cache-bust — Cloudflare's edge cached a 404 for
+ * /banner.webp from before the first successful Pages deploy, with a 4h
+ * TTL. Versioning the URL forces a fresh origin fetch. Bump on real
+ * banner changes; otherwise leave alone.
  */
+const BANNER_VERSION = "2";
 ---
 
 <header class="reveal mb-8 sm:mb-10">
   <img
-    src="/banner.webp"
+    src={`/banner.webp?v=${BANNER_VERSION}`}
     alt="chuds.dev"
     width="1280"
     height="320"
