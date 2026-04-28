@@ -26,6 +26,8 @@ export type Project = {
   live?: boolean;
   /** Show prominently in the featured row at the top of the grid. */
   featured?: boolean;
+  /** Single full-width spotlight at the very top of the grid. */
+  spotlight?: boolean;
 };
 
 export const projects: Project[] = [
@@ -40,7 +42,7 @@ export const projects: Project[] = [
     website: "https://ant.chuds.dev",
     stack: ["TypeScript", "Vite", "Canvas 2D", "Web Audio"],
     live: true,
-    featured: true,
+    spotlight: true,
   },
   {
     slug: "hudaim",
@@ -142,8 +144,9 @@ export const projects: Project[] = [
   },
 ];
 
+export const spotlight = projects.find((p) => p.spotlight);
 export const featured = projects.filter((p) => p.featured);
-export const rest = projects.filter((p) => !p.featured);
+export const rest = projects.filter((p) => !p.featured && !p.spotlight);
 
 /** Hex map — kept in lockstep with the @theme tokens in src/styles/global.css. */
 export const ACCENT_HEX: Record<Accent, string> = {

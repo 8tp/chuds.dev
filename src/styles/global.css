@@ -186,14 +186,28 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Project tile hover — yabai accent on focus ── */
 .tile {
-  transition: transform 200ms ease, border-color 200ms ease;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 .tile:hover {
   transform: translateY(-2px);
-  border-color: var(--win-accent, var(--color-brand)) !important;
+  border-color: color-mix(in oklab, var(--win-accent, var(--color-brand)) 60%, var(--color-border)) !important;
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 3%, transparent) inset,
+    0 24px 36px -20px color-mix(in oklab, var(--win-accent, var(--color-brand)) 30%, black);
 }
 .tile:hover::before {
   opacity: 1;
+}
+
+/* ── Keyboard focus ring — magenta, never stomps on content ── */
+:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline-offset: 3px;
 }
 
 /* ── ASCII divider for section transitions ── */

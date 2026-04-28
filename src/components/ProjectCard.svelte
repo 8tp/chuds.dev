@@ -11,13 +11,16 @@
   // prompt cites, so the generated image and the surrounding chrome match.
   const accent = ACCENT_HEX[project.accent];
   const thumbSrc = `/projects/${project.slug}.webp`;
+  const isSpotlight = $derived(!!project.spotlight);
 </script>
 
 <article
-  class="win tile flex flex-col"
+  class="win tile flex {isSpotlight
+    ? 'lg:flex-row lg:[&>.thumb]:w-[58%] lg:[&>.body]:w-[42%]'
+    : 'flex-col'}"
   style="--win-accent: {accent}"
 >
-  <!-- Title bar — fake kitty-window chrome, with the project's domain or repo path -->
+  <!-- Title bar — fake kitty-window chrome -->
   <div class="win-title">
     <span class="win-dots"><span></span><span></span><span></span></span>
     <span class="truncate">
@@ -36,7 +39,11 @@
   </div>
 
   <!-- Thumbnail body -->
-  <div class="relative aspect-[16/10] overflow-hidden bg-bg-dark">
+  <div
+    class="thumb relative aspect-[16/10] overflow-hidden bg-bg-dark shrink-0 {isSpotlight
+      ? 'lg:aspect-auto lg:self-stretch lg:border-r lg:border-border'
+      : ''}"
+  >
     <img
       src={thumbSrc}
       alt="{project.name} preview"
@@ -50,22 +57,46 @@
       }}
     />
     <!-- Bottom vignette — keeps the page legible even with bright thumbnails -->
-    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-panel via-panel/40 to-transparent"></div>
+    <div
+      class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-panel via-panel/40 to-transparent {isSpotlight
+        ? 'lg:hidden'
+        : ''}"
+    ></div>
   </div>
 
   <!-- Body -->
-  <div class="px-4 py-3.5 flex flex-col gap-2.5 flex-1">
+  <div
+    class="body px-4 py-3.5 flex flex-col gap-2.5 flex-1 {isSpotlight
+      ? 'lg:p-6 lg:gap-3.5 lg:justify-center'
+      : ''}"
+  >
     <div class="flex items-center gap-2">
       <span class="size-2 rounded-full" style="background: {accent}"></span>
-      <h3 class="font-display text-base font-semibold text-fg leading-tight">
+      <h3
+        class="font-display font-semibold text-fg leading-tight {isSpotlight
+          ? 'text-xl lg:text-2xl'
+          : 'text-base'}"
+      >
         {project.name}
       </h3>
       {#if !project.live}
         <span class="ml-auto font-mono text-[10px] text-comment">{project.year}</span>
       {/if}
+      {#if isSpotlight}
+        <span
+          class="ml-auto px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider border"
+          style="color: {accent}; border-color: {accent}66; background: {accent}11;"
+        >
+          spotlight
+        </span>
+      {/if}
     </div>
 
-    <p class="text-[13px] text-fg-dim leading-relaxed">
+    <p
+      class="text-fg-dim leading-relaxed {isSpotlight
+        ? 'text-sm lg:text-[0.95rem]'
+        : 'text-[13px]'}"
+    >
       {project.description}
     </p>
 
@@ -81,7 +112,7 @@
           href={project.website}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 text-fg hover:opacity-80 transition-opacity"
+          class="inline-flex items-center gap-1.5 hover:opacity-80 transition-opacity"
           style="color: {accent}"
         >
           <span>→</span>

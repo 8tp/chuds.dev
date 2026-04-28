@@ -1,18 +1,27 @@
 ---
 import SectionLabel from "./SectionLabel.astro";
 import ProjectCard from "./ProjectCard.svelte";
-import { featured, rest } from "~/data/projects";
+import { spotlight, featured, rest } from "~/data/projects";
 ---
 
 <section class="reveal" id="projects" style="--reveal-delay: 160ms">
   <SectionLabel index="03" label="projects" cmd="ls -la projects/" />
 
+  <!-- Spotlight: single full-width card. -->
+  {spotlight && (
+    <div class="mb-3">
+      <ProjectCard project={spotlight} client:visible />
+    </div>
+  )}
+
+  <!-- Featured: 3 cards on lg+, balanced row. -->
   {featured.length > 0 && (
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
       {featured.map((p) => <ProjectCard project={p} client:visible />)}
     </div>
   )}
 
+  <!-- Rest: 6 cards, two clean rows of 3 on lg+. -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
     {rest.map((p) => <ProjectCard project={p} client:visible />)}
   </div>
