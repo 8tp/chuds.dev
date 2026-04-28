@@ -1,0 +1,16 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+import ProjectCard from "./ProjectCard.svelte";
+import { projects } from "~/data/projects";
+---
+
+<section class="reveal" id="projects" style="--reveal-delay: 160ms">
+  <SectionLabel index="03" label="projects" cmd="ls -la projects/" />
+
+  <!-- 2-up grid even on lg. 10 projects → clean 5 rows, no orphan. Cards
+       get more horizontal room than they would at 3-up, which makes the
+       thumbnail readable instead of postage-stamp-sized. -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {projects.map((p) => <ProjectCard project={p} client:load />)}
+  </div>
+</section>

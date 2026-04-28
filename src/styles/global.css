@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 where to scan for classnames — Svelte + Astro both. */
+@source "../**/*.{astro,svelte,ts,tsx,html}";
+
+/* ──────────────────────────────────────────────────────────────────
+   Tokyo Night palette — pulled directly from ~/.config/kitty/kitty.conf
+   and ~/.config/yabai/yabairc so the site matches the rig.
+   ─────────────────────────────────────────────────────────────── */
+@theme {
+  /* Backgrounds & surfaces */
+  --color-bg: #1a1b26;
+  --color-bg-dark: #16161e;
+  --color-bg-darker: #0f0f17;
+  --color-panel: #1f2335;
+  --color-elev: #292e42;
+  --color-border: #3b4261;
+
+  /* Foregrounds */
+  --color-fg: #c0caf5;
+  --color-fg-dim: #a9b1d6;
+  --color-fg-muted: #737aa2;
+  --color-comment: #565f89;
+  --color-gutter: #414868;
+
+  /* Accents — kitty's ANSI 0-15 plus a few Tokyo Night extensions */
+  --color-red: #f7768e;
+  --color-orange: #ff9e64;
+  --color-yellow: #e0af68;
+  --color-green: #9ece6a;
+  --color-mint: #73daca;
+  --color-cyan: #7dcfff;
+  --color-blue: #7aa2f7;
+  --color-magenta: #bb9af7;
+  --color-purple: #9d7cd8;
+  --color-pink: #ff007c;
+
+  /* Yabai's insert-feedback magenta — used as the brand accent */
+  --color-brand: #bb9af7;
+
+  --font-display: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    /* Distant magenta wash bottom-right (yabai insert-feedback flavor) */
+    radial-gradient(ellipse 70% 50% at 100% 100%, color-mix(in oklab, var(--color-magenta) 8%, transparent), transparent 65%),
+    /* Distant cyan wash top-left */
+    radial-gradient(ellipse 60% 50% at 0% 0%, color-mix(in oklab, var(--color-cyan) 7%, transparent), transparent 60%),
+    var(--color-bg);
+}
+
+/* ── Custom scrollbar — Tokyo Night terminal style ── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--color-gutter); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-comment); }
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-magenta) 35%, transparent);
+  color: var(--color-fg);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Window chrome — every panel looks like a kitty terminal window.
+   Inspired by yabai's tiled layout: thin colored top border that
+   acts as the "active" indicator, traffic-light dots on the left,
+   and an optional title in monospace.
+   ─────────────────────────────────────────────────────────────── */
+.win {
+  position: relative;
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 3%, transparent) inset,
+    0 16px 32px -20px rgba(0, 0, 0, 0.6);
+}
+.win::before {
+  /* yabai-style accent stripe along the top edge — the "focused window" */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--win-accent, var(--color-brand));
+  opacity: 0.7;
+}
+
+.win-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.625rem;
+  background: var(--color-bg-dark);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-fg-muted);
+  min-width: 0;
+}
+
+/* Three-dot traffic lights — drawn flat, no gloss */
+.win-dots {
+  display: inline-flex;
+  gap: 0.3rem;
+  margin-right: 0.125rem;
+  flex-shrink: 0;
+}
+.win-dots > span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+}
+.win-dots > span:nth-child(1) { background: var(--color-red); }
+.win-dots > span:nth-child(2) { background: var(--color-yellow); }
+.win-dots > span:nth-child(3) { background: var(--color-green); }
+
+.win-body {
+  padding: 0.875rem 1rem;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Pills — terminal-tag style with monospace font.
+   ─────────────────────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  background: color-mix(in oklab, var(--color-elev) 70%, transparent);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg-dim);
+  font-size: 0.6875rem;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.pill::before {
+  content: "·";
+  color: var(--color-fg-muted);
+}
+
+/* Anchor reset */
+a { color: inherit; text-decoration: none; }
+
+/* ── Wallpaper grain — the same "tinted background" feel as kitty ── */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.022;
+  z-index: 100;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ── Subtle entrance ── */
+@starting-style {
+  .reveal {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+}
+.reveal {
+  transition:
+    opacity 350ms ease,
+    transform 350ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* ── Project tile hover — yabai accent on focus ── */
+.tile {
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+.tile:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--win-accent, var(--color-brand)) 60%, var(--color-border)) !important;
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 3%, transparent) inset,
+    0 24px 36px -20px color-mix(in oklab, var(--win-accent, var(--color-brand)) 30%, black);
+}
+.tile:hover::before {
+  opacity: 1;
+}
+
+/* ── Keyboard focus ring — magenta, never stomps on content ── */
+:focus-visible {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline-offset: 3px;
+}
+
+/* ── ASCII divider for section transitions ── */
+.ascii-rule {
+  font-family: var(--font-mono);
+  color: var(--color-comment);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
