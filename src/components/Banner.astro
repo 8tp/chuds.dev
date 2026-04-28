@@ -1,21 +1,18 @@
 ---
-import { site } from "~/data/site";
-
 /**
- * Plain HTML text banner — no image asset, no window chrome. Just a
- * styled wordmark and tagline, which scales naturally and doesn't have
- * the bugs that came with the image-based banner.
+ * Generated typography banner. The image carries the wordmark and tagline,
+ * keeping the hero art direction consistent with the project thumbnails.
  */
 ---
 
 <header class="reveal mb-8 sm:mb-10">
-  <h1 class="font-display font-bold tracking-tight leading-none text-5xl sm:text-6xl lg:text-7xl">
-    <span class="text-fg">chuds</span><span class="text-magenta">.dev</span><span
-      class="inline-block w-[2px] h-[0.85em] align-middle ml-1 bg-magenta animate-pulse"
-      aria-hidden="true"></span>
-  </h1>
-  <p class="mt-3 font-mono text-xs sm:text-sm text-fg-muted">
-    <span class="text-green">$</span>
-    {site.tagline}
-  </p>
+  <img
+    src="/banner.webp"
+    alt="chuds.dev"
+    width="1280"
+    height="320"
+    class="block w-full h-auto rounded-xl border border-border"
+    loading="eager"
+    decoding="async"
+  />
 </header>
