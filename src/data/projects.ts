@@ -47,7 +47,7 @@ export const projects: Project[] = [
   {
     slug: "hudaim",
     name: "HudAim",
-    year: 2025,
+    year: 2026,
     description:
       "Browser-based aim trainer with 6 game modes, 60 FPS replay system, LAN leaderboards and HMAC-SHA256 anti-cheat.",
     accent: "cyan",
@@ -60,7 +60,7 @@ export const projects: Project[] = [
   {
     slug: "coup",
     name: "Coup",
-    year: 2025,
+    year: 2026,
     description:
       "Real-time multiplayer bluffing card game. Bots, room codes, mobile-friendly. No install, no accounts.",
     accent: "green",
@@ -73,7 +73,7 @@ export const projects: Project[] = [
   {
     slug: "typeduel",
     name: "TypeDuel",
-    year: 2025,
+    year: 2026,
     description:
       "Real-time multiplayer typing combat. Type fast, deal damage, use abilities, defeat your opponent.",
     accent: "red",
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   {
     slug: "tidewatcher",
     name: "TideWatcher",
-    year: 2025,
+    year: 2026,
     description:
       "System monitor TUI with tide-inspired live charts, process views, and theme-aware ASCII scenes.",
     accent: "orange",
@@ -95,9 +95,9 @@ export const projects: Project[] = [
   {
     slug: "ghgarden",
     name: "ghgarden",
-    year: 2025,
+    year: 2026,
     description:
-      "GitHub contribution visualizer in the terminal — heatmaps, streak stats, language breakdowns, 6 themes.",
+      "GitHub contribution visualizer in the terminal, with heatmaps, streak stats, language breakdowns, and 6 themes.",
     accent: "mint",
     source: "https://github.com/8tp/ghgarden",
     stack: ["Rust", "Ratatui"],
@@ -105,9 +105,9 @@ export const projects: Project[] = [
   {
     slug: "netmap",
     name: "netmap",
-    year: 2025,
+    year: 2026,
     description:
-      "Visual network topology mapper and scanner — discover devices, scan ports, measure latency.",
+      "Visual network topology mapper and scanner. Discover devices, scan ports, measure latency.",
     accent: "blue",
     source: "https://github.com/8tp/netmap",
     stack: ["Go", "Bubble Tea"],
@@ -115,7 +115,7 @@ export const projects: Project[] = [
   {
     slug: "litestats",
     name: "LiteStats",
-    year: 2025,
+    year: 2026,
     description:
       "Lightweight macOS menu bar app for real-time CPU, RAM, storage, battery, and temperature.",
     accent: "magenta",
@@ -125,7 +125,7 @@ export const projects: Project[] = [
   {
     slug: "screencap",
     name: "ScreenCap",
-    year: 2025,
+    year: 2026,
     description:
       "Native macOS screenshot & annotation app. Area / window / scrolling capture, screen recording, OCR, GIF export.",
     accent: "purple",
@@ -135,7 +135,7 @@ export const projects: Project[] = [
   {
     slug: "recopy",
     name: "Recopy",
-    year: 2025,
+    year: 2026,
     description:
       "Native macOS menu bar clipboard manager. Zero dependencies, fully offline, built with SwiftData.",
     accent: "yellow",

@@ -12,7 +12,6 @@ export const site = {
   },
   socials: [
     { label: "GitHub", url: "https://github.com/8tp", id: "github" },
-    { label: "Email", url: "mailto:hunter@chuds.dev", id: "mail" },
   ],
   /**
    * Tech stack — mirrors the legacy chuds.dev "Tools of the trade" grid.
