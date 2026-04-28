@@ -147,6 +147,8 @@ export const projects: Project[] = [
 export const spotlight = projects.find((p) => p.spotlight);
 export const featured = projects.filter((p) => p.featured);
 export const rest = projects.filter((p) => !p.featured && !p.spotlight);
+// `projects` itself is what the page renders now — kept ordered with live
+// projects at the top via the array literal above.
 
 /** Hex map — kept in lockstep with the @theme tokens in src/styles/global.css. */
 export const ACCENT_HEX: Record<Accent, string> = {

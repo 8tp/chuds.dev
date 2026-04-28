@@ -1,6 +1,5 @@
 ---
 import Layout from "~/layouts/Layout.astro";
-import StatusBar from "~/components/StatusBar.astro";
 import Banner from "~/components/Banner.astro";
 import Sidebar from "~/components/Sidebar.astro";
 import About from "~/components/About.astro";
@@ -9,22 +8,21 @@ import Projects from "~/components/Projects.astro";
 ---
 
 <Layout>
-  <StatusBar />
   <Banner />
 
-  <div class="grid grid-cols-1 lg:grid-cols-[15rem_1fr] gap-6 lg:gap-10">
+  <div class="grid grid-cols-1 lg:grid-cols-[14rem_1fr] gap-6 lg:gap-10">
     <Sidebar />
 
-    <div class="flex flex-col gap-8 sm:gap-10 min-w-0">
+    <div class="flex flex-col gap-7 sm:gap-8 min-w-0">
       <About />
       <Tools />
       <Projects />
 
-      <footer class="pt-6 mt-2 border-t border-border/60 text-xs text-fg-muted font-mono">
+      <footer class="pt-5 mt-1 border-t border-border/60 text-[11px] text-fg-muted font-mono">
         <div class="flex flex-col sm:flex-row justify-between gap-2">
           <span>
             <span class="text-comment">$</span>
-            echo "© {new Date().getFullYear()} chuds.dev — astro + svelte, tokyonight"
+            echo "© {new Date().getFullYear()} chuds.dev — astro + svelte · tokyonight"
           </span>
           <a
             href="https://github.com/8tp/chuds.dev"
