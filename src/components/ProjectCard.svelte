@@ -22,11 +22,11 @@
 
 {#if spotlight}
   <article class="tile relative grid sm:grid-cols-[1.1fr_1fr] gap-0 border border-border bg-panel">
-    <div class="absolute -top-3 left-4 z-10 flex items-center gap-2 font-mono text-[10px] uppercase">
+    <div class="absolute -top-3 left-3 z-10 flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] uppercase">
       <span class="bg-fg text-panel px-2 py-1 border border-border">spotlight</span>
       <span class="bg-panel text-fg px-2 py-1 border border-border">{stamp}</span>
     </div>
-    <div class="relative aspect-[5/3] sm:aspect-auto overflow-hidden border-b sm:border-b-0 sm:border-r border-border bg-bg-dark screentone">
+    <div class="relative aspect-[16/9] sm:aspect-auto overflow-hidden border-b sm:border-b-0 sm:border-r border-border bg-bg-dark screentone">
       <img
         src={thumbSrc}
         alt="{project.name} preview"
@@ -38,12 +38,12 @@
         {project.live ? "live · play" : project.year}
       </span>
     </div>
-    <div class="flex flex-col gap-3 p-5">
+    <div class="flex flex-col gap-2.5 sm:gap-3 p-3.5 sm:p-5">
       <div>
         <p class="font-mono text-[11px] text-fg-muted uppercase">// hero / chapter 02</p>
-        <h3 class="font-display text-3xl sm:text-4xl font-black leading-none mt-1">{project.name}</h3>
+        <h3 class="font-display text-2xl sm:text-4xl font-black leading-none mt-1">{project.name}</h3>
       </div>
-      <p class="text-sm leading-relaxed text-fg-dim">{project.description}</p>
+      <p class="text-[13px] sm:text-sm leading-snug sm:leading-relaxed text-fg-dim">{project.description}</p>
       <div class="flex flex-wrap gap-1">
         {#if metric?.language}
           <span class="pill">{metric.language}</span>
@@ -52,7 +52,7 @@
           <span class="pill">{tech}</span>
         {/each}
       </div>
-      <dl class="grid grid-cols-3 gap-3 mt-auto pt-3 border-t border-border font-mono text-[11px]">
+      <dl class="grid grid-cols-3 gap-3 mt-auto pt-2.5 sm:pt-3 border-t border-border font-mono text-[11px]">
         {#if metric}
           <div>
             <dt class="text-fg-muted">stars</dt>
@@ -98,11 +98,11 @@
     </div>
   </article>
 {:else if compact}
-  <article class="tile relative border border-border bg-panel min-h-[10.5rem] flex flex-col">
+  <article class="tile relative border border-border bg-panel min-h-[8.5rem] sm:min-h-[10.5rem] flex flex-col">
     <span class="absolute top-1 right-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10">
       {stamp}
     </span>
-    <div class="relative aspect-[4/3] overflow-hidden border-b border-border bg-bg-dark">
+    <div class="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden border-b border-border bg-bg-dark">
       <img
         src={thumbSrc}
         alt="{project.name} preview"
@@ -111,8 +111,8 @@
         class="size-full object-cover grayscale contrast-110"
       />
     </div>
-    <div class="p-2.5 flex flex-col gap-1 flex-1">
-      <h3 class="font-display text-base font-black leading-none">{project.name}</h3>
+    <div class="p-2 sm:p-2.5 flex flex-col gap-1 flex-1">
+      <h3 class="font-display text-sm sm:text-base font-black leading-none">{project.name}</h3>
       <p class="line-clamp-2 text-[11px] leading-snug text-fg-dim">{project.description}</p>
       <p class="mt-auto font-mono text-[10px] text-fg-muted">
         {#if metric}
@@ -124,7 +124,7 @@
     </div>
   </article>
 {:else}
-  <article class="tile group relative grid grid-cols-[4.25rem_1fr] sm:grid-cols-[5rem_1fr_auto] gap-3 border border-border bg-panel p-2.5">
+  <article class="tile group relative grid grid-cols-[3.25rem_1fr] sm:grid-cols-[5rem_1fr_auto] gap-2.5 sm:gap-3 border border-border bg-panel p-2 sm:p-2.5">
     <span class="absolute top-1 left-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10">
       {stamp}
     </span>
@@ -139,18 +139,18 @@
     </div>
 
     <div class="min-w-0 py-0.5">
-      <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h3 class="font-display text-lg font-black leading-none">{project.name}</h3>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+        <h3 class="font-display text-base sm:text-lg font-black leading-none">{project.name}</h3>
         <span class="font-mono text-[10px] text-fg-muted">{project.live ? "LIVE" : project.year}</span>
         {#if metric}
-          <span class="font-mono text-[10px] text-fg-muted">stars {metric.stars}</span>
-          <span class="font-mono text-[10px] text-fg-muted">forks {metric.forks}</span>
+          <span class="hidden sm:inline font-mono text-[10px] text-fg-muted">stars {metric.stars}</span>
+          <span class="hidden sm:inline font-mono text-[10px] text-fg-muted">forks {metric.forks}</span>
         {/if}
       </div>
-      <p class="mt-1.5 text-[12.5px] leading-snug text-fg-dim max-w-3xl">
+      <p class="mt-1 text-[12px] sm:text-[12.5px] leading-snug text-fg-dim line-clamp-2 sm:line-clamp-none max-w-3xl">
         {project.description}
       </p>
-      <div class="mt-2 flex flex-wrap gap-1">
+      <div class="mt-1.5 hidden sm:flex flex-wrap gap-1">
         {#if metric?.language}
           <span class="pill">{metric.language}</span>
         {/if}
@@ -159,11 +159,11 @@
         {/each}
       </div>
       {#if metric}
-        <p class="mt-1 font-mono text-[10px] text-fg-muted">updated {formatShortDate(metric.updatedAt)}</p>
+        <p class="mt-1 hidden sm:block font-mono text-[10px] text-fg-muted">updated {formatShortDate(metric.updatedAt)}</p>
       {/if}
     </div>
 
-    <div class="col-span-2 sm:col-span-1 flex sm:flex-col items-center sm:items-end justify-between gap-2 font-mono text-[11px]">
+    <div class="col-span-2 sm:col-span-1 mt-1 sm:mt-0 flex sm:flex-col items-center sm:items-end justify-end sm:justify-between gap-2 font-mono text-[11px]">
       {#if project.source}
         <a
           href={project.source}
@@ -179,7 +179,7 @@
           href={project.website}
           target="_blank"
           rel="noopener noreferrer"
-          class="border border-border px-3 py-1.5 hover:bg-fg hover:text-panel transition-colors"
+          class="border border-border px-3 py-1 sm:py-1.5 hover:bg-fg hover:text-panel transition-colors"
         >
           open -&gt;
         </a>

@@ -22,7 +22,7 @@ const sections = [
 ];
 ---
 
-<aside class="lg:sticky lg:top-8 grid grid-cols-1 sm:grid-cols-[6rem_1fr] lg:grid-cols-1 gap-4 lg:gap-5">
+<aside class="lg:sticky lg:top-8 grid grid-cols-1 sm:grid-cols-[6rem_1fr] lg:grid-cols-1 gap-3 sm:gap-4 lg:gap-5">
   <div class="relative hidden sm:flex min-h-[28rem] lg:min-h-[34rem] border border-border bg-panel overflow-hidden">
     <a
       href="/"
@@ -48,19 +48,19 @@ const sections = [
     </a>
   </div>
 
-  <div class="flex flex-col gap-4 lg:gap-5">
+  <div class="flex flex-col gap-3 sm:gap-4 lg:gap-5">
     <section class="win">
       <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
         <span>// cover star</span>
         <span class="text-gutter">no. {String(github.profile.publicRepos).padStart(2, "0")}</span>
       </div>
-      <div class="relative aspect-[4/3] overflow-hidden border-b border-border screentone">
+      <div class="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden border-b border-border screentone">
         <img
           src="https://avatars.githubusercontent.com/u/79799382?s=512&v=4"
           alt={site.author.name}
           width="512"
           height="512"
-          class="size-full object-cover grayscale contrast-125 mix-blend-multiply"
+          class="size-full object-cover object-top grayscale contrast-125 mix-blend-multiply"
           loading="eager"
           decoding="async"
         />
@@ -68,15 +68,15 @@ const sections = [
           @{site.author.handle}
         </span>
       </div>
-      <div class="bg-fg text-panel px-4 py-3">
-        <p class="font-display text-2xl font-black leading-none">{site.author.name}</p>
-        <p class="font-mono text-[11px] mt-1 text-gutter">{site.author.pronouns} · {site.author.location}</p>
+      <div class="bg-fg text-panel px-3 sm:px-4 py-2 sm:py-3">
+        <p class="font-display text-xl sm:text-2xl font-black leading-none">{site.author.name}</p>
+        <p class="font-mono text-[11px] mt-0.5 sm:mt-1 text-gutter">{site.author.pronouns} · {site.author.location}</p>
       </div>
-      <div class="px-4 py-3 space-y-3 text-sm leading-relaxed">
-        <p class="font-mono text-[12px]">
+      <div class="px-3 sm:px-4 py-2.5 sm:py-3 space-y-2.5 sm:space-y-3 text-sm leading-relaxed">
+        <p class="font-mono text-[12px] hidden sm:block">
           premium software,<br />engineered from the basement
         </p>
-        <div class="grid grid-cols-2 gap-y-1.5 gap-x-2 border-t border-border pt-3 font-mono text-[11px]">
+        <div class="grid grid-cols-4 sm:grid-cols-2 gap-y-1 sm:gap-y-1.5 gap-x-2 sm:border-t sm:border-border sm:pt-3 font-mono text-[10px] sm:text-[11px]">
           <span><strong class="text-fg">{github.profile.publicRepos}</strong> repos</span>
           <span><strong class="text-fg">{github.profile.followers}</strong> followers</span>
           <span><strong class="text-fg">{formatCompact(github.profile.yearlyContributions)}</strong> contribs</span>
@@ -118,7 +118,7 @@ const sections = [
         <span>// tech stack</span>
         <span>{tools.length} tools</span>
       </div>
-      <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 p-4 font-mono text-xs">
+      <div class="grid grid-cols-3 sm:grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-1 sm:gap-y-1.5 p-3 sm:p-4 font-mono text-[11px] sm:text-xs">
         {tools.map((tool) => (
           <span class="flex items-baseline gap-1.5">
             <span class="text-comment">·</span>
