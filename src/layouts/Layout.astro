@@ -12,7 +12,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
 ---
 
 <!doctype html>
-<html lang="en" data-theme="tokyonight">
+<html lang="en" data-theme="manga-ink">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -21,7 +21,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.author.name} />
-    <meta name="theme-color" content="#1a1b26" />
+    <meta name="theme-color" content="#f3f0e8" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -38,12 +38,12 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${site.url}/og.png`} />
 
-    <!-- Inter + JetBrains Mono — sans + mono pair, both with full weight ranges -->
+    <!-- Display + mono pair for the manga editorial direction. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
     />
 
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -55,7 +55,7 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     })} />
   </head>
   <body class="grain">
-    <main class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14">
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 sm:py-7 lg:py-8">
       <slot />
     </main>
   </body>

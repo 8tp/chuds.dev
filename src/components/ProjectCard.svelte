@@ -1,113 +1,189 @@
 <script lang="ts">
-  import { ACCENT_HEX, type Project } from "~/data/projects";
+  import { formatShortDate, getRepoMetric } from "~/data/github";
+  import type { Project } from "~/data/projects";
 
   interface Props {
     project: Project;
+    /** Compact tile (utilities & apps grid). */
+    compact?: boolean;
+    /** Single-row featured spread (default for chapter 02). */
+    /** Full-width hero panel reserved for the spotlight pick. */
+    spotlight?: boolean;
+    /** 1-based card index used for the case-file stamp. */
+    index?: number;
   }
 
-  let { project }: Props = $props();
-
-  // Derived from project so they react if the prop ever changes — also
-  // silences Svelte 5's `state_referenced_locally` warning that breaks
-  // hydration when prop fields are read in the script's top-level scope.
-  const accent = $derived(ACCENT_HEX[project.accent]);
-  const thumbSrc = $derived(`/projects/${project.slug}.webp`);
+  let { project, compact = false, spotlight = false, index = 0 }: Props = $props();
+  const thumbSrc = $derived(project.thumbnail ?? `/projects/${project.slug}.webp`);
+  const metric = $derived(getRepoMetric(project.slug, project.name));
+  const stack = $derived(project.stack.filter((tech) => tech.toLowerCase() !== metric?.language?.toLowerCase()));
+  const stamp = $derived(`ep. ${String(index).padStart(2, "0")}`);
 </script>
 
-<article class="win tile flex flex-col" style="--win-accent: {accent}">
-  <!-- Compact title bar — kitty traffic-lights, project domain, status -->
-  <div class="win-title">
-    <span class="win-dots"><span></span><span></span><span></span></span>
-    <span class="truncate">
-      {project.website
-        ? project.website.replace(/^https?:\/\//, "")
-        : `~/${project.slug}`}
+{#if spotlight}
+  <article class="tile relative grid sm:grid-cols-[1.1fr_1fr] gap-0 border border-border bg-panel">
+    <div class="absolute -top-3 left-4 z-10 flex items-center gap-2 font-mono text-[10px] uppercase">
+      <span class="bg-fg text-panel px-2 py-1 border border-border">spotlight</span>
+      <span class="bg-panel text-fg px-2 py-1 border border-border">{stamp}</span>
+    </div>
+    <div class="relative aspect-[5/3] sm:aspect-auto overflow-hidden border-b sm:border-b-0 sm:border-r border-border bg-bg-dark screentone">
+      <img
+        src={thumbSrc}
+        alt="{project.name} preview"
+        loading="eager"
+        decoding="async"
+        class="size-full object-cover grayscale contrast-110"
+      />
+      <span class="absolute top-2 right-2 bg-fg text-panel px-2 py-1 font-mono text-[10px] uppercase">
+        {project.live ? "live · play" : project.year}
+      </span>
+    </div>
+    <div class="flex flex-col gap-3 p-5">
+      <div>
+        <p class="font-mono text-[11px] text-fg-muted uppercase">// hero / chapter 02</p>
+        <h3 class="font-display text-3xl sm:text-4xl font-black leading-none mt-1">{project.name}</h3>
+      </div>
+      <p class="text-sm leading-relaxed text-fg-dim">{project.description}</p>
+      <div class="flex flex-wrap gap-1">
+        {#if metric?.language}
+          <span class="pill">{metric.language}</span>
+        {/if}
+        {#each stack as tech}
+          <span class="pill">{tech}</span>
+        {/each}
+      </div>
+      <dl class="grid grid-cols-3 gap-3 mt-auto pt-3 border-t border-border font-mono text-[11px]">
+        {#if metric}
+          <div>
+            <dt class="text-fg-muted">stars</dt>
+            <dd class="font-bold text-fg">{metric.stars}</dd>
+          </div>
+          <div>
+            <dt class="text-fg-muted">forks</dt>
+            <dd class="font-bold text-fg">{metric.forks}</dd>
+          </div>
+          <div>
+            <dt class="text-fg-muted">updated</dt>
+            <dd class="font-bold text-fg">{formatShortDate(metric.updatedAt)}</dd>
+          </div>
+        {:else}
+          <div>
+            <dt class="text-fg-muted">year</dt>
+            <dd class="font-bold text-fg">{project.year}</dd>
+          </div>
+        {/if}
+      </dl>
+      <div class="flex gap-2 font-mono text-xs">
+        {#if project.website}
+          <a
+            href={project.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 text-center border border-border bg-fg text-panel px-3 py-2 hover:bg-panel hover:text-fg transition-colors"
+          >
+            play -&gt;
+          </a>
+        {/if}
+        {#if project.source}
+          <a
+            href={project.source}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 text-center border border-border bg-panel px-3 py-2 hover:bg-fg hover:text-panel transition-colors"
+          >
+            github
+          </a>
+        {/if}
+      </div>
+    </div>
+  </article>
+{:else if compact}
+  <article class="tile relative border border-border bg-panel min-h-[10.5rem] flex flex-col">
+    <span class="absolute top-1 right-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10">
+      {stamp}
     </span>
-    <span class="ml-auto flex items-center gap-1.5 text-[10px] shrink-0">
-      {#if project.live}
-        <span class="size-1.5 rounded-full animate-pulse" style="background: {accent}"></span>
-        <span style="color: {accent}">LIVE</span>
-      {:else}
-        <span class="text-comment">{project.year}</span>
-      {/if}
+    <div class="relative aspect-[4/3] overflow-hidden border-b border-border bg-bg-dark">
+      <img
+        src={thumbSrc}
+        alt="{project.name} preview"
+        loading="lazy"
+        decoding="async"
+        class="size-full object-cover grayscale contrast-110"
+      />
+    </div>
+    <div class="p-2.5 flex flex-col gap-1 flex-1">
+      <h3 class="font-display text-base font-black leading-none">{project.name}</h3>
+      <p class="line-clamp-2 text-[11px] leading-snug text-fg-dim">{project.description}</p>
+      <p class="mt-auto font-mono text-[10px] text-fg-muted">
+        {#if metric}
+          stars {metric.stars} / updated {formatShortDate(metric.updatedAt)}
+        {:else}
+          [{project.stack.slice(0, 2).join("] [")}]
+        {/if}
+      </p>
+    </div>
+  </article>
+{:else}
+  <article class="tile group relative grid grid-cols-[4.25rem_1fr] sm:grid-cols-[5rem_1fr_auto] gap-3 border border-border bg-panel p-2.5">
+    <span class="absolute top-1 left-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10">
+      {stamp}
     </span>
-  </div>
+    <div class="relative aspect-square overflow-hidden border border-border bg-bg-dark screentone">
+      <img
+        src={thumbSrc}
+        alt="{project.name} preview"
+        loading="lazy"
+        decoding="async"
+        class="size-full object-cover grayscale contrast-110 transition-transform duration-300 group-hover:scale-[1.04]"
+      />
+    </div>
 
-  <!-- Thumbnail body -->
-  <div class="thumb relative aspect-[16/10] overflow-hidden bg-bg-dark">
-    <img
-      src={thumbSrc}
-      alt="{project.name} preview"
-      loading="lazy"
-      decoding="async"
-      class="size-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-      onerror={(e: Event) => {
-        const img = e.currentTarget as HTMLImageElement;
-        img.style.display = "none";
-        img.parentElement?.classList.add("placeholder");
-      }}
-    />
-  </div>
-
-  <!-- Body -->
-  <div class="px-3.5 py-3 flex flex-col gap-2 flex-1">
-    <div class="flex items-center gap-2">
-      <span class="size-1.5 rounded-full shrink-0" style="background: {accent}"></span>
-      <h3 class="font-display text-[15px] font-semibold text-fg leading-tight">
-        {project.name}
-      </h3>
-      {#if !project.live}
-        <span class="ml-auto font-mono text-[10px] text-comment">{project.year}</span>
+    <div class="min-w-0 py-0.5">
+      <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h3 class="font-display text-lg font-black leading-none">{project.name}</h3>
+        <span class="font-mono text-[10px] text-fg-muted">{project.live ? "LIVE" : project.year}</span>
+        {#if metric}
+          <span class="font-mono text-[10px] text-fg-muted">stars {metric.stars}</span>
+          <span class="font-mono text-[10px] text-fg-muted">forks {metric.forks}</span>
+        {/if}
+      </div>
+      <p class="mt-1.5 text-[12.5px] leading-snug text-fg-dim max-w-3xl">
+        {project.description}
+      </p>
+      <div class="mt-2 flex flex-wrap gap-1">
+        {#if metric?.language}
+          <span class="pill">{metric.language}</span>
+        {/if}
+        {#each stack as tech}
+          <span class="pill">{tech}</span>
+        {/each}
+      </div>
+      {#if metric}
+        <p class="mt-1 font-mono text-[10px] text-fg-muted">updated {formatShortDate(metric.updatedAt)}</p>
       {/if}
     </div>
 
-    <p class="text-[12.5px] text-fg-dim leading-relaxed">
-      {project.description}
-    </p>
-
-    <div class="flex flex-wrap gap-1 mt-auto pt-1">
-      {#each project.stack as tech}
-        <span class="pill">{tech}</span>
-      {/each}
-    </div>
-
-    <div class="flex items-center gap-3 pt-1 text-[11px] font-mono">
-      {#if project.website}
-        <a
-          href={project.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 hover:opacity-80 transition-opacity truncate"
-          style="color: {accent}"
-        >
-          <span>→</span>
-          <span class="truncate">{project.website.replace(/^https?:\/\//, "")}</span>
-        </a>
-      {/if}
+    <div class="col-span-2 sm:col-span-1 flex sm:flex-col items-center sm:items-end justify-between gap-2 font-mono text-[11px]">
       {#if project.source}
         <a
           href={project.source}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 text-fg-muted hover:text-fg transition-colors ml-auto shrink-0"
-          aria-label="Source on GitHub"
+          class="ink-link hover:bg-fg hover:text-panel px-1 transition-colors"
         >
-          <svg viewBox="0 0 24 24" class="size-3" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          source
+          github
+        </a>
+      {/if}
+      {#if project.website}
+        <a
+          href={project.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border border-border px-3 py-1.5 hover:bg-fg hover:text-panel transition-colors"
+        >
+          open -&gt;
         </a>
       {/if}
     </div>
-  </div>
-</article>
-
-<style>
-  /* Diagonal-stripe placeholder for missing thumbnails — Tokyo Night flavored. */
-  :global(.placeholder) {
-    background:
-      repeating-linear-gradient(
-        135deg,
-        var(--color-bg-dark) 0 12px,
-        var(--color-elev) 12px 14px
-      );
-  }
-</style>
+  </article>
+{/if}

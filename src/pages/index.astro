@@ -3,34 +3,102 @@ import Layout from "~/layouts/Layout.astro";
 import Banner from "~/components/Banner.astro";
 import Sidebar from "~/components/Sidebar.astro";
 import About from "~/components/About.astro";
-import Tools from "~/components/Tools.astro";
 import Projects from "~/components/Projects.astro";
+import { github } from "~/data/github";
+
+const issn = "1208-" + String(github.profile.publicRepos).padStart(2, "0") + "26";
+
+// Deterministic pseudo-random barcode bars so server + client match.
+const barcodeWidths = [3, 1, 2, 4, 1, 3, 2, 1, 5, 1, 2, 3, 1, 4, 2, 1, 3, 2, 1, 4, 1, 3, 2, 5, 1, 2, 3, 1, 4, 2, 1, 3, 2, 1, 4, 2];
 ---
 
 <Layout>
-  <Banner />
-
-  <div class="grid grid-cols-1 lg:grid-cols-[14rem_1fr] gap-6 lg:gap-10">
+  <div class="grid grid-cols-1 lg:grid-cols-[18.5rem_minmax(0,1fr)] xl:grid-cols-[20rem_minmax(0,1fr)] gap-6 lg:gap-9 items-start">
     <Sidebar />
 
-    <div class="flex flex-col gap-7 sm:gap-8 min-w-0">
+    <div class="flex flex-col gap-5 sm:gap-6 min-w-0">
+      <Banner />
       <About />
-      <Tools />
       <Projects />
 
-      <footer class="pt-5 mt-1 border-t border-border/60 text-[11px] text-fg-muted font-mono">
-        <div class="flex flex-col sm:flex-row justify-between gap-2">
-          <span>
-            <span class="text-comment">$</span>
-            echo "© {new Date().getFullYear()} chuds.dev · astro + svelte · tokyonight"
-          </span>
+      <footer class="mt-2 border border-border bg-panel">
+        <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+          <span>// colophon</span>
+          <span>back cover</span>
+        </div>
+
+        <div class="grid sm:grid-cols-[1fr_auto] gap-4 p-4">
+          <div class="space-y-3 font-mono text-[11px]">
+            <p>
+              <span class="text-fg">$</span>
+              echo "© {new Date().getFullYear()} chuds.dev · manga-ink edition"
+            </p>
+            <p class="text-fg-muted">
+              set in space grotesk + jetbrains mono. inked, screentoned, and stapled in the basement.
+            </p>
+            <a
+              href="https://github.com/8tp/chuds.dev"
+              target="_blank"
+              rel="noopener"
+              class="ink-link hover:bg-fg hover:text-panel px-1 -mx-1 transition-colors inline-block"
+            >
+              view source -&gt;
+            </a>
+          </div>
+          <div class="flex sm:flex-col items-start sm:items-end gap-3 sm:gap-2">
+            <div
+              aria-hidden="true"
+              class="hidden sm:flex items-end gap-[2px] h-12 border border-border bg-panel px-2 py-1"
+            >
+              {barcodeWidths.map((w) => (
+                <span
+                  class="block bg-fg h-full"
+                  style={`width: ${w}px;`}
+                />
+              ))}
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-normal text-fg-muted">
+              issn {issn} · vol. 2026
+            </p>
+          </div>
+        </div>
+
+        <div class="border-t border-border grid sm:grid-cols-3 font-mono text-[11px]">
           <a
-            href="https://github.com/8tp/chuds.dev"
+            href="https://astro.build"
             target="_blank"
             rel="noopener"
-            class="hover:text-magenta transition-colors"
+            class="group flex items-center justify-between gap-3 border-b sm:border-b-0 sm:border-r border-border px-4 py-3 hover:bg-fg hover:text-panel transition-colors"
           >
-            view source →
+            <span class="flex flex-col">
+              <span class="text-[10px] uppercase text-fg-muted group-hover:text-panel">// pressed with</span>
+              <span class="text-fg font-bold group-hover:text-panel">Astro 6</span>
+            </span>
+            <span class="text-fg-muted group-hover:text-panel">astro.build -&gt;</span>
+          </a>
+          <a
+            href="https://svelte.dev"
+            target="_blank"
+            rel="noopener"
+            class="group flex items-center justify-between gap-3 border-b sm:border-b-0 sm:border-r border-border px-4 py-3 hover:bg-fg hover:text-panel transition-colors"
+          >
+            <span class="flex flex-col">
+              <span class="text-[10px] uppercase text-fg-muted group-hover:text-panel">// inked with</span>
+              <span class="text-fg font-bold group-hover:text-panel">Svelte 5</span>
+            </span>
+            <span class="text-fg-muted group-hover:text-panel">svelte.dev -&gt;</span>
+          </a>
+          <a
+            href="https://tailwindcss.com"
+            target="_blank"
+            rel="noopener"
+            class="group flex items-center justify-between gap-3 px-4 py-3 hover:bg-fg hover:text-panel transition-colors"
+          >
+            <span class="flex flex-col">
+              <span class="text-[10px] uppercase text-fg-muted group-hover:text-panel">// styled with</span>
+              <span class="text-fg font-bold group-hover:text-panel">Tailwind 4</span>
+            </span>
+            <span class="text-fg-muted group-hover:text-panel">tailwindcss.com -&gt;</span>
           </a>
         </div>
       </footer>

@@ -20,6 +20,7 @@ export type Project = {
   accent: Accent;
   source?: string;
   website?: string;
+  thumbnail?: string;
   /** Tech stack pills — keep to 3-4 max for visual balance. */
   stack: string[];
   /** Marks the project as "live" — shown with a pulsing dot. */
@@ -40,9 +41,10 @@ export const projects: Project[] = [
     accent: "yellow",
     source: "https://github.com/8tp/AntMaze",
     website: "https://ant.chuds.dev",
+    thumbnail: "/projects/antmaze-bw.webp",
     stack: ["TypeScript", "Vite", "Canvas 2D", "Web Audio"],
     live: true,
-    spotlight: true,
+    featured: true,
   },
   {
     slug: "hudaim",
@@ -53,6 +55,7 @@ export const projects: Project[] = [
     accent: "cyan",
     source: "https://github.com/8tp/hudaim",
     website: "https://aim.chuds.dev",
+    thumbnail: "/projects/hudaim-bw.webp",
     stack: ["React 19", "Tailwind", "Node/Express", "IndexedDB"],
     live: true,
     featured: true,
@@ -66,9 +69,10 @@ export const projects: Project[] = [
     accent: "green",
     source: "https://github.com/8tp/Coup",
     website: "https://coup.chuds.dev",
+    thumbnail: "/projects/coup-bw.webp",
     stack: ["Next.js", "TypeScript", "Socket.io", "Zustand"],
     live: true,
-    featured: true,
+    spotlight: true,
   },
   {
     slug: "typeduel",
@@ -79,6 +83,7 @@ export const projects: Project[] = [
     accent: "red",
     source: "https://github.com/8tp/typeduel",
     website: "https://duel.chuds.dev",
+    thumbnail: "/projects/typeduel-bw.webp",
     stack: ["TypeScript", "React", "WebSocket", "Zustand"],
     live: true,
   },
@@ -90,6 +95,7 @@ export const projects: Project[] = [
       "System monitor TUI with tide-inspired live charts, process views, and theme-aware ASCII scenes.",
     accent: "orange",
     source: "https://github.com/8tp/tidewatcher",
+    thumbnail: "/projects/tidewatcher-bw.webp",
     stack: ["Rust", "Ratatui"],
   },
   {
@@ -100,6 +106,7 @@ export const projects: Project[] = [
       "GitHub contribution visualizer in the terminal, with heatmaps, streak stats, language breakdowns, and 6 themes.",
     accent: "mint",
     source: "https://github.com/8tp/ghgarden",
+    thumbnail: "/projects/ghgarden-bw.webp",
     stack: ["Rust", "Ratatui"],
   },
   {
@@ -110,6 +117,7 @@ export const projects: Project[] = [
       "Visual network topology mapper and scanner. Discover devices, scan ports, measure latency.",
     accent: "blue",
     source: "https://github.com/8tp/netmap",
+    thumbnail: "/projects/netmap-bw.webp",
     stack: ["Go", "Bubble Tea"],
   },
   {
@@ -120,6 +128,7 @@ export const projects: Project[] = [
       "Lightweight macOS menu bar app for real-time CPU, RAM, storage, battery, and temperature.",
     accent: "magenta",
     source: "https://github.com/8tp/LiteStats",
+    thumbnail: "/projects/litestats-bw.webp",
     stack: ["Swift", "SwiftUI", "IOKit"],
   },
   {
@@ -130,6 +139,7 @@ export const projects: Project[] = [
       "Native macOS screenshot & annotation app. Area / window / scrolling capture, screen recording, OCR, GIF export.",
     accent: "purple",
     source: "https://github.com/8tp/ScreenCap",
+    thumbnail: "/projects/screencap-bw.webp",
     stack: ["Swift", "SwiftUI", "Vision"],
   },
   {
@@ -140,6 +150,7 @@ export const projects: Project[] = [
       "Native macOS menu bar clipboard manager. Zero dependencies, fully offline, built with SwiftData.",
     accent: "yellow",
     source: "https://github.com/8tp/Recopy",
+    thumbnail: "/projects/recopy-bw.webp",
     stack: ["Swift", "SwiftUI", "SwiftData"],
   },
 ];

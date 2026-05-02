@@ -2,15 +2,41 @@
 import SectionLabel from "./SectionLabel.astro";
 import ProjectCard from "./ProjectCard.svelte";
 import { projects } from "~/data/projects";
+
+const spotlight = projects.find((p) => p.spotlight);
+const featured = projects.filter((p) => !p.spotlight).slice(0, 4);
+const utilities = projects.filter((p) => !p.spotlight).slice(4);
 ---
 
 <section class="reveal" id="projects" style="--reveal-delay: 160ms">
-  <SectionLabel index="03" label="projects" cmd="ls -la projects/" />
+  <SectionLabel index="02" label="projects" cmd="ls -la repos/" glyph="作" />
 
-  <!-- 2-up grid even on lg. 10 projects → clean 5 rows, no orphan. Cards
-       get more horizontal room than they would at 3-up, which makes the
-       thumbnail readable instead of postage-stamp-sized. -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    {projects.map((p) => <ProjectCard project={p} client:load />)}
+  {spotlight && (
+    <div class="mb-5">
+      <ProjectCard project={spotlight} spotlight index={1} />
+    </div>
+  )}
+
+  <div class="border border-border bg-panel">
+    <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+      <span>// chapter 02 / featured spreads</span>
+      <a href="https://github.com/8tp" target="_blank" rel="noopener noreferrer" class="ink-link hover:bg-panel hover:text-fg px-1 transition-colors">
+        view all repos -&gt;
+      </a>
+    </div>
+
+    <div class="divide-y divide-border">
+      {featured.map((p, i) => <ProjectCard project={p} index={i + 2} />)}
+    </div>
+  </div>
+
+  <div class="mt-5 border border-border bg-panel">
+    <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+      <span>// chapter 03 / utilities &amp; apps</span>
+      <span>{utilities.length} entries</span>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 p-3">
+      {utilities.map((p, i) => <ProjectCard project={p} compact index={featured.length + i + 2} />)}
+    </div>
   </div>
 </section>

@@ -1,74 +1,152 @@
 ---
 import { site } from "~/data/site";
+import { formatCompact, github } from "~/data/github";
+
+const tools = [
+  ...site.tools.languages,
+  "React",
+  "Astro",
+  "Ratatui",
+  "SwiftUI",
+  "Node.js",
+  "PostgreSQL",
+  "Docker",
+  "Cloudflare",
+  "macOS",
+];
+
+const sections = [
+  { label: "about", href: "#about" },
+  { label: "projects", href: "#projects" },
+  { label: "stack", href: "#stack" },
+];
 ---
 
-<aside class="flex flex-col items-start gap-4 lg:gap-5 lg:sticky lg:top-6">
-  <!-- Profile window: tighter than trafficlunar's, with a kitty-style title bar -->
-  <div class="win w-full" style="--win-accent: var(--color-cyan)">
-    <div class="win-title">
-      <span class="win-dots"><span></span><span></span><span></span></span>
-      <span>~/whoami</span>
-    </div>
-    <div class="win-body flex items-center gap-3.5">
-      <div class="relative shrink-0">
+<aside class="lg:sticky lg:top-8 grid grid-cols-1 sm:grid-cols-[6rem_1fr] lg:grid-cols-1 gap-4 lg:gap-5">
+  <div class="relative hidden sm:flex min-h-[28rem] lg:min-h-[34rem] border border-border bg-panel overflow-hidden">
+    <a
+      href="/"
+      aria-label="chuds.dev home"
+      class="group relative flex w-full items-center justify-center bg-panel"
+    >
+      <span class="absolute top-3 left-3 font-mono text-[10px] font-bold uppercase tracking-normal">
+        // {site.author.handle}
+      </span>
+      <span class="absolute top-3 right-3 font-mono text-[10px] uppercase tracking-normal text-fg-muted">
+        spine
+      </span>
+      <span class="absolute bottom-3 left-3 flex flex-col gap-0.5 font-mono text-[10px] uppercase tracking-normal text-fg-muted leading-tight">
+        <span class="text-fg font-bold">vol. 2026</span>
+        <span>issue 01</span>
+      </span>
+      <span class="absolute bottom-3 right-3 font-mono text-[10px] uppercase tracking-normal text-fg-muted [writing-mode:vertical-rl]">
+        manga edition
+      </span>
+      <span class="font-display text-[5.4rem] lg:text-[5.75rem] font-black leading-none tracking-normal [writing-mode:vertical-rl] rotate-180 group-hover:translate-x-[-2px] transition-transform">
+        {site.title}
+      </span>
+    </a>
+  </div>
+
+  <div class="flex flex-col gap-4 lg:gap-5">
+    <section class="win">
+      <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+        <span>// cover star</span>
+        <span class="text-gutter">no. {String(github.profile.publicRepos).padStart(2, "0")}</span>
+      </div>
+      <div class="relative aspect-[4/3] overflow-hidden border-b border-border screentone">
         <img
-          src="https://avatars.githubusercontent.com/u/79799382?s=128&v=4"
+          src="https://avatars.githubusercontent.com/u/79799382?s=512&v=4"
           alt={site.author.name}
-          width="56"
-          height="56"
-          class="size-14 rounded-md border border-border"
+          width="512"
+          height="512"
+          class="size-full object-cover grayscale contrast-125 mix-blend-multiply"
           loading="eager"
           decoding="async"
         />
-        <span
-          class="absolute -bottom-1 -right-1 size-3 rounded-full bg-green ring-2 ring-panel"
-          title="Available for chats"></span>
+        <span class="absolute bottom-2 right-2 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase">
+          @{site.author.handle}
+        </span>
       </div>
-      <div class="min-w-0">
-        <p class="font-display font-bold text-fg text-sm leading-tight truncate">
-          {site.author.name}
+      <div class="bg-fg text-panel px-4 py-3">
+        <p class="font-display text-2xl font-black leading-none">{site.author.name}</p>
+        <p class="font-mono text-[11px] mt-1 text-gutter">{site.author.pronouns} · {site.author.location}</p>
+      </div>
+      <div class="px-4 py-3 space-y-3 text-sm leading-relaxed">
+        <p class="font-mono text-[12px]">
+          premium software,<br />engineered from the basement
         </p>
-        <p class="text-xs text-fg-muted font-mono">@{site.author.handle}</p>
-        <p class="text-[10px] text-comment font-mono mt-0.5">
-          {site.author.pronouns} · {site.author.location}
+        <div class="grid grid-cols-2 gap-y-1.5 gap-x-2 border-t border-border pt-3 font-mono text-[11px]">
+          <span><strong class="text-fg">{github.profile.publicRepos}</strong> repos</span>
+          <span><strong class="text-fg">{github.profile.followers}</strong> followers</span>
+          <span><strong class="text-fg">{formatCompact(github.profile.yearlyContributions)}</strong> contribs</span>
+          <span><strong class="text-fg">{github.profile.totalStars}</strong> stars</span>
+        </div>
+        <a
+          href="https://github.com/8tp"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-between border border-border bg-panel px-3 py-2 font-mono text-xs font-bold hover:bg-fg hover:text-panel transition-colors"
+        >
+          <span>GitHub</span>
+          <span>github.com/8tp -&gt;</span>
+        </a>
+      </div>
+    </section>
+
+    <nav class="hidden lg:block border border-border bg-panel" aria-label="Sections">
+      <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+        <span>// table of contents</span>
+        <span>toc</span>
+      </div>
+      <div class="flex flex-col font-mono text-xs">
+        {sections.map((item, index) => (
+          <a
+            href={item.href}
+            class="flex items-center justify-between border-b border-border px-3 py-2 last:border-b-0 hover:bg-fg hover:text-panel transition-colors"
+          >
+            <span>// {String(index + 1).padStart(2, "0")}</span>
+            <span>/{item.label}</span>
+            <span class="text-fg-muted text-[10px]">p. {String(index + 1).padStart(2, "0")}</span>
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <section id="stack" class="border border-border bg-panel">
+      <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+        <span>// tech stack</span>
+        <span>{tools.length} tools</span>
+      </div>
+      <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 p-4 font-mono text-xs">
+        {tools.map((tool) => (
+          <span class="flex items-baseline gap-1.5">
+            <span class="text-comment">·</span>
+            <span>{tool}</span>
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <div class="hidden lg:block aspect-[4/3] border border-border bg-panel">
+      <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+        <span>// scene 01</span>
+        <span>workspace</span>
+      </div>
+      <div class="relative h-[calc(100%-1.6rem)] overflow-hidden bg-bg-dark">
+        <img
+          src="/manga-workspace.png"
+          alt="Black-and-white manga illustration of a developer workspace"
+          width="1000"
+          height="750"
+          class="size-full object-cover grayscale contrast-125 mix-blend-multiply"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="absolute bottom-1 left-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase">
+          basement HQ
         </p>
       </div>
     </div>
-  </div>
-
-  <!-- Section nav — terminal-prompt styling instead of trafficlunar's "01 / xxx" -->
-  <nav
-    class="hidden lg:flex flex-col gap-0.5 w-full font-mono text-xs"
-    aria-label="Sections"
-  >
-    {[
-      { label: "about", href: "#about", n: "01" },
-      { label: "tools", href: "#tools", n: "02" },
-      { label: "projects", href: "#projects", n: "03" },
-    ].map((item) => (
-      <a
-        href={item.href}
-        class="group flex items-center gap-2 px-2 py-1.5 rounded-md text-fg-muted hover:text-fg hover:bg-elev/50 transition-colors"
-      >
-        <span class="text-comment group-hover:text-magenta transition-colors">{item.n}</span>
-        <span class="text-comment">~$</span>
-        <span>cd {item.label}</span>
-      </a>
-    ))}
-  </nav>
-
-  <!-- Socials — render as command-style links -->
-  <div class="flex flex-row lg:flex-col gap-1.5 w-full">
-    {site.socials.map((s) => (
-      <a
-        href={s.url}
-        target={s.url.startsWith("http") ? "_blank" : undefined}
-        rel={s.url.startsWith("http") ? "noopener noreferrer" : undefined}
-        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md border border-border bg-bg-dark/50 hover:bg-elev/50 hover:border-magenta/60 transition-colors text-xs text-fg-dim hover:text-fg font-mono"
-      >
-        <span class="text-magenta">→</span>
-        <span class="lowercase">{s.label}</span>
-      </a>
-    ))}
   </div>
 </aside>
