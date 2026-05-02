@@ -8,13 +8,13 @@ import { formatCompact, github } from "~/data/github";
     <span>// cover star</span>
     <span class="text-gutter">no. {String(github.profile.publicRepos).padStart(2, "0")}</span>
   </div>
-  <div class="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden border-b border-border screentone">
+  <div class="relative aspect-square sm:aspect-[4/3] overflow-hidden border-b border-border screentone">
     <img
       src="https://avatars.githubusercontent.com/u/79799382?s=512&v=4"
       alt={site.author.name}
       width="512"
       height="512"
-      class="size-full object-cover object-top grayscale contrast-125 mix-blend-multiply"
+      class="size-full object-cover sm:object-top grayscale contrast-125 mix-blend-multiply"
       loading="eager"
       decoding="async"
     />

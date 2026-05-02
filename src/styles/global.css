@@ -144,7 +144,12 @@ body {
   color: var(--color-comment);
 }
 
-a { color: inherit; text-decoration: none; }
+/* Anchor reset must live in @layer base so Tailwind utility classes
+   like `text-panel` (in @layer utilities) can still override it.
+   Without the layer wrapper, this unlayered rule beats every utility. */
+@layer base {
+  a { color: inherit; text-decoration: none; }
+}
 
 .grain::after {
   content: "";
