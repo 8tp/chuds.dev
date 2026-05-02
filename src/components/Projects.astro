@@ -4,8 +4,10 @@ import ProjectCard from "./ProjectCard.svelte";
 import { projects } from "~/data/projects";
 
 const spotlight = projects.find((p) => p.spotlight);
-const featured = projects.filter((p) => !p.spotlight).slice(0, 4);
-const utilities = projects.filter((p) => !p.spotlight).slice(4);
+// Featured spreads = live games (excluding the spotlight pick).
+// Utilities & apps = everything else.
+const featured = projects.filter((p) => p.live && !p.spotlight);
+const utilities = projects.filter((p) => !p.live && !p.spotlight);
 ---
 
 <section class="reveal" id="projects" style="--reveal-delay: 160ms">
