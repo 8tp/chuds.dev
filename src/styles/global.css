@@ -226,3 +226,13 @@ button:focus-visible {
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
 }
+
+/* Sidebar rail — inner scroll for the sticky desktop sidebar.  Hide the
+   scrollbar visually (it appears on hover only via the WebKit rule) so the
+   sidebar reads as a clean magazine spine until the user interacts. */
+.sidebar-rail {
+  scrollbar-width: none;
+}
+.sidebar-rail::-webkit-scrollbar { width: 0; }
+.sidebar-rail:hover { scrollbar-width: thin; }
+.sidebar-rail:hover::-webkit-scrollbar { width: 6px; }
