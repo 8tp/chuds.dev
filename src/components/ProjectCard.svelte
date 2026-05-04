@@ -18,6 +18,7 @@
   const metric = $derived(getRepoMetric(project.slug, project.name));
   const stack = $derived(project.stack.filter((tech) => tech.toLowerCase() !== metric?.language?.toLowerCase()));
   const stamp = $derived(`ep. ${String(index).padStart(2, "0")}`);
+  const projectHref = $derived(project.website ?? project.source);
 </script>
 
 {#if spotlight}
@@ -98,8 +99,14 @@
     </div>
   </article>
 {:else if compact}
-  <article class="tile relative border border-border bg-panel min-h-[8.5rem] sm:min-h-[10.5rem] flex flex-col">
-    <span class="absolute top-1 right-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10">
+  <svelte:element
+    this={projectHref ? "a" : "article"}
+    href={projectHref}
+    target={projectHref ? "_blank" : undefined}
+    rel={projectHref ? "noopener noreferrer" : undefined}
+    class="tile group relative border border-border bg-panel min-h-[8.5rem] sm:min-h-[10.5rem] flex flex-col {projectHref ? 'hover:border-fg hover:bg-fg hover:text-panel transition-colors' : ''}"
+  >
+    <span class="absolute top-1 right-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10 group-hover:bg-panel group-hover:text-fg">
       {stamp}
     </span>
     <div class="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden border-b border-border bg-bg-dark">
@@ -108,13 +115,13 @@
         alt="{project.name} preview"
         loading="lazy"
         decoding="async"
-        class="size-full object-cover grayscale contrast-110"
+        class="size-full object-cover grayscale contrast-110 transition-transform duration-300 group-hover:scale-[1.04]"
       />
     </div>
     <div class="p-2 sm:p-2.5 flex flex-col gap-1 flex-1">
       <h3 class="font-display text-sm sm:text-base font-black leading-none">{project.name}</h3>
-      <p class="line-clamp-2 text-[11px] leading-snug text-fg-dim">{project.description}</p>
-      <p class="mt-auto font-mono text-[10px] text-fg-muted">
+      <p class="line-clamp-2 text-[11px] leading-snug text-fg-dim group-hover:text-panel">{project.description}</p>
+      <p class="mt-auto font-mono text-[10px] text-fg-muted group-hover:text-panel">
         {#if metric}
           stars {metric.stars} / updated {formatShortDate(metric.updatedAt)}
         {:else}
@@ -122,7 +129,7 @@
         {/if}
       </p>
     </div>
-  </article>
+  </svelte:element>
 {:else}
   <article class="tile group relative grid grid-cols-[3.25rem_1fr] sm:grid-cols-[5rem_1fr_auto] gap-2.5 sm:gap-3 border border-border bg-panel p-2 sm:p-2.5">
     <span class="absolute top-1 left-1 bg-fg text-panel px-1.5 py-0.5 font-mono text-[9px] uppercase z-10">
