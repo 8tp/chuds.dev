@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '0 12 * * *'
   workflow_dispatch:
 
 permissions:
@@ -30,6 +32,12 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Refresh GitHub snapshot
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm github:data
+
       - run: pnpm build
 
       - uses: actions/configure-pages@v5
