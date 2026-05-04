@@ -40,7 +40,7 @@ const repoMetrics = Object.fromEntries(
 );
 
 const rawEvents = execFileSync("gh", ["api", `users/${login}/events/public`, "--paginate"], { encoding: "utf8" });
-const recentActivity = JSON.parse(rawEvents).slice(0, 6).map((event) => {
+const recentActivity = JSON.parse(rawEvents).slice(0, 20).map((event) => {
   let label = event.type;
   if (event.type === "PushEvent") label = `pushed to ${event.repo.name.replace(`${login}/`, "")}`;
   if (event.type === "PullRequestEvent") label = `${event.payload.action ?? "opened"} PR in ${event.repo.name.replace(`${login}/`, "")}`;

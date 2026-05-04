@@ -34,14 +34,17 @@ import { formatShortDate, github } from "~/data/github";
       </div>
     </article>
 
-    <aside class="border border-border bg-panel">
-      <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase">
+    <aside class="border border-border bg-panel flex flex-col">
+      <div class="flex items-center justify-between border-b border-border bg-fg text-panel px-3 py-1 font-mono text-[10px] uppercase shrink-0">
         <span>// recent activity</span>
-        <span>last 4</span>
+        <span>feed</span>
       </div>
-      <ul class="space-y-2 font-mono text-xs p-4 screentone">
-        {github.recentActivity.slice(0, 4).map((item) => (
-          <li class="grid grid-cols-[1fr_auto] gap-3 border-b border-border pb-2 last:border-b-0 last:pb-0">
+      <ul class="space-y-2 font-mono text-xs p-4 screentone flex-1 min-h-0 md:overflow-hidden md:[mask-image:linear-gradient(to_bottom,black_calc(100%-2.5rem),transparent)]">
+        {github.recentActivity.slice(0, 12).map((item, idx) => (
+          <li class:list={[
+            "grid grid-cols-[1fr_auto] gap-3 border-b border-border pb-2 last:border-b-0 last:pb-0",
+            idx >= 4 && "hidden md:grid",
+          ]}>
             <span class="truncate min-w-0">{item.label}</span>
             <span class="text-fg-muted shrink-0">{formatShortDate(item.at)}</span>
           </li>
