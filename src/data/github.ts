@@ -1,17 +1,17 @@
 export const github = {
-  "generatedAt": "2026-05-02T19:22:12.808Z",
+  "generatedAt": "2026-06-09T20:47:47.061Z",
   "profile": {
-    "publicRepos": 22,
-    "followers": 4,
-    "following": 5,
-    "yearlyContributions": 285,
-    "contributedToRepos": 3,
-    "totalStars": 5,
-    "totalForks": 2
+    "publicRepos": 35,
+    "followers": 5,
+    "following": 6,
+    "yearlyContributions": 1651,
+    "contributedToRepos": 6,
+    "totalStars": 12,
+    "totalForks": 3
   },
   "contributions": {
-    "start": "2025-04-27",
-    "end": "2026-05-02",
+    "start": "2025-06-08",
+    "end": "2026-06-09",
     "nonzero": [
       [
         "2025-09-15",
@@ -30,8 +30,16 @@ export const github = {
         3
       ],
       [
-        "2026-02-25",
+        "2025-10-07",
+        2
+      ],
+      [
+        "2026-01-29",
         1
+      ],
+      [
+        "2026-02-25",
+        4
       ],
       [
         "2026-02-27",
@@ -47,19 +55,23 @@ export const github = {
       ],
       [
         "2026-03-02",
-        14
+        16
+      ],
+      [
+        "2026-03-03",
+        2
       ],
       [
         "2026-03-05",
-        37
+        49
       ],
       [
         "2026-03-06",
-        6
+        25
       ],
       [
         "2026-03-07",
-        6
+        9
       ],
       [
         "2026-03-08",
@@ -82,24 +94,128 @@ export const github = {
         1
       ],
       [
+        "2026-03-13",
+        12
+      ],
+      [
+        "2026-03-14",
+        16
+      ],
+      [
         "2026-03-18",
         10
       ],
       [
+        "2026-03-21",
+        14
+      ],
+      [
         "2026-03-22",
-        16
+        21
       ],
       [
         "2026-03-23",
         1
       ],
       [
+        "2026-03-24",
+        9
+      ],
+      [
+        "2026-03-25",
+        41
+      ],
+      [
+        "2026-03-26",
+        27
+      ],
+      [
+        "2026-03-27",
+        45
+      ],
+      [
+        "2026-03-28",
+        3
+      ],
+      [
+        "2026-03-29",
+        2
+      ],
+      [
+        "2026-03-30",
+        2
+      ],
+      [
+        "2026-03-31",
+        7
+      ],
+      [
+        "2026-04-01",
+        2
+      ],
+      [
+        "2026-04-04",
+        3
+      ],
+      [
+        "2026-04-06",
+        11
+      ],
+      [
+        "2026-04-07",
+        64
+      ],
+      [
+        "2026-04-08",
+        18
+      ],
+      [
         "2026-04-09",
+        54
+      ],
+      [
+        "2026-04-10",
+        10
+      ],
+      [
+        "2026-04-11",
+        7
+      ],
+      [
+        "2026-04-12",
         6
       ],
       [
+        "2026-04-14",
+        1
+      ],
+      [
+        "2026-04-15",
+        1
+      ],
+      [
+        "2026-04-16",
+        38
+      ],
+      [
+        "2026-04-17",
+        13
+      ],
+      [
+        "2026-04-20",
+        6
+      ],
+      [
+        "2026-04-21",
+        3
+      ],
+      [
+        "2026-04-24",
+        13
+      ],
+      [
         "2026-04-28",
-        14
+        15
       ],
       [
         "2026-04-29",
@@ -107,28 +223,220 @@ export const github = {
       ],
       [
         "2026-04-30",
+        11
+      ],
+      [
+        "2026-05-02",
+        17
+      ],
+      [
+        "2026-05-03",
         10
+      ],
+      [
+        "2026-05-04",
+        53
+      ],
+      [
+        "2026-05-05",
+        83
+      ],
+      [
+        "2026-05-06",
+        171
+      ],
+      [
+        "2026-05-07",
+        70
+      ],
+      [
+        "2026-05-08",
+        4
+      ],
+      [
+        "2026-05-09",
+        8
+      ],
+      [
+        "2026-05-10",
+        48
+      ],
+      [
+        "2026-05-11",
+        287
+      ],
+      [
+        "2026-05-13",
+        6
+      ],
+      [
+        "2026-05-14",
+        2
+      ],
+      [
+        "2026-05-17",
+        4
+      ],
+      [
+        "2026-05-27",
+        1
+      ],
+      [
+        "2026-05-29",
+        7
+      ],
+      [
+        "2026-05-30",
+        7
+      ],
+      [
+        "2026-05-31",
+        7
+      ],
+      [
+        "2026-06-01",
+        7
+      ],
+      [
+        "2026-06-03",
+        18
+      ],
+      [
+        "2026-06-04",
+        33
+      ],
+      [
+        "2026-06-05",
+        21
+      ],
+      [
+        "2026-06-07",
+        17
+      ],
+      [
+        "2026-06-08",
+        5
+      ],
+      [
+        "2026-06-09",
+        7
       ]
     ]
   },
   "repoMetrics": {
-    "coup": {
-      "stars": 1,
-      "forks": 2,
+    "instagib-arena": {
+      "stars": 0,
+      "forks": 0,
       "language": "TypeScript",
-      "updatedAt": "2026-05-01T02:40:02Z"
+      "updatedAt": "2026-06-09T20:24:47Z"
+    },
+    "goose": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "updatedAt": "2026-06-04T14:39:41Z"
+    },
+    "typeduel": {
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "updatedAt": "2026-05-24T07:22:20Z"
+    },
+    "spotify-player": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "updatedAt": "2026-05-17T13:17:08Z"
+    },
+    "circular-scroll": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "updatedAt": "2026-05-17T05:37:32Z"
+    },
+    "still-launcher": {
+      "stars": 1,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-12T01:39:40Z"
+    },
+    "still-voice": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:51Z"
+    },
+    "still-clock": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:44Z"
+    },
+    "still-cal": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:43Z"
+    },
+    "still-sms": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:42Z"
+    },
+    "still-dialer": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:39Z"
+    },
+    "still-contacts": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:36Z"
+    },
+    "still-notes": {
+      "stars": 0,
+      "forks": 0,
+      "language": "Kotlin",
+      "updatedAt": "2026-05-11T23:16:27Z"
+    },
+    "netmap": {
+      "stars": 2,
+      "forks": 0,
+      "language": "Go",
+      "updatedAt": "2026-05-11T17:25:40Z"
+    },
+    "hudaim": {
+      "stars": 1,
+      "forks": 0,
+      "language": "JavaScript",
+      "updatedAt": "2026-05-08T15:31:05Z"
+    },
+    "chuds-arcade": {
+      "stars": 1,
+      "forks": 0,
+      "language": "TypeScript",
+      "updatedAt": "2026-05-08T15:30:49Z"
+    },
+    "chuds.dev": {
+      "stars": 1,
+      "forks": 0,
+      "language": "HTML",
+      "updatedAt": "2026-05-08T15:30:47Z"
+    },
+    "coup": {
+      "stars": 2,
+      "forks": 3,
+      "language": "TypeScript",
+      "updatedAt": "2026-05-04T06:24:51Z"
     },
     "8tp": {
       "stars": 0,
       "forks": 0,
       "language": null,
-      "updatedAt": "2026-04-29T01:34:14Z"
-    },
-    "chuds.dev": {
-      "stars": 0,
-      "forks": 0,
-      "language": "HTML",
-      "updatedAt": "2026-04-28T21:56:45Z"
+      "updatedAt": "2026-05-02T23:12:07Z"
     },
     "screencap": {
       "stars": 3,
@@ -166,12 +474,6 @@ export const github = {
       "language": "TypeScript",
       "updatedAt": "2026-03-18T18:23:25Z"
     },
-    "typeduel": {
-      "stars": 0,
-      "forks": 0,
-      "language": "TypeScript",
-      "updatedAt": "2026-03-12T15:54:08Z"
-    },
     "recopy": {
       "stars": 0,
       "forks": 0,
@@ -202,12 +504,6 @@ export const github = {
       "language": "Rust",
       "updatedAt": "2026-03-05T18:34:38Z"
     },
-    "netmap": {
-      "stars": 0,
-      "forks": 0,
-      "language": "Go",
-      "updatedAt": "2026-03-05T06:49:03Z"
-    },
     "tidewatcher": {
       "stars": 0,
       "forks": 0,
@@ -219,12 +515,6 @@ export const github = {
       "forks": 0,
       "language": "JavaScript",
       "updatedAt": "2026-03-02T16:25:33Z"
-    },
-    "hudaim": {
-      "stars": 0,
-      "forks": 0,
-      "language": "JavaScript",
-      "updatedAt": "2026-03-01T07:35:14Z"
     },
     "dtak-ui-maps": {
       "stars": 0,
@@ -247,34 +537,104 @@ export const github = {
   },
   "recentActivity": [
     {
-      "label": "starred imputnet/helium",
-      "repo": "imputnet/helium",
-      "at": "2026-05-02T17:54:19Z"
+      "label": "pushed to instagib-arena",
+      "repo": "8tp/instagib-arena",
+      "at": "2026-06-09T20:24:01Z"
     },
     {
-      "label": "starred UzenUPozitiv4ik/gpt-image-2-skill",
-      "repo": "UzenUPozitiv4ik/gpt-image-2-skill",
-      "at": "2026-05-01T14:31:17Z"
+      "label": "merged PR in instagib-arena",
+      "repo": "8tp/instagib-arena",
+      "at": "2026-06-09T20:24:00Z"
     },
     {
-      "label": "pushed to Coup",
-      "repo": "8tp/Coup",
-      "at": "2026-05-01T12:48:25Z"
+      "label": "created branch in instagib-arena",
+      "repo": "8tp/instagib-arena",
+      "at": "2026-06-09T20:07:29Z"
     },
     {
-      "label": "merged PR in Coup",
-      "repo": "8tp/Coup",
-      "at": "2026-05-01T02:39:58Z"
+      "label": "pushed to instagib-arena",
+      "repo": "8tp/instagib-arena",
+      "at": "2026-06-09T20:07:29Z"
     },
     {
-      "label": "pushed to Coup",
-      "repo": "8tp/Coup",
-      "at": "2026-05-01T02:39:59Z"
+      "label": "created branch in instagib-arena",
+      "repo": "8tp/instagib-arena",
+      "at": "2026-06-09T20:07:28Z"
     },
     {
-      "label": "opened PR in Coup",
-      "repo": "8tp/Coup",
-      "at": "2026-04-30T22:34:47Z"
+      "label": "PublicEvent",
+      "repo": "8tp/instagib-arena",
+      "at": "2026-05-29T16:09:03Z"
+    },
+    {
+      "label": "ForkEvent",
+      "repo": "b-nnett/goose",
+      "at": "2026-06-04T14:39:40Z"
+    },
+    {
+      "label": "starred b-nnett/goose",
+      "repo": "b-nnett/goose",
+      "at": "2026-06-04T14:37:54Z"
+    },
+    {
+      "label": "starred firecrawl/firecrawl",
+      "repo": "firecrawl/firecrawl",
+      "at": "2026-05-18T00:12:45Z"
+    },
+    {
+      "label": "ForkEvent",
+      "repo": "aome510/spotify-player",
+      "at": "2026-05-17T13:17:08Z"
+    },
+    {
+      "label": "starred aome510/spotify-player",
+      "repo": "aome510/spotify-player",
+      "at": "2026-05-17T06:22:04Z"
+    },
+    {
+      "label": "PublicEvent",
+      "repo": "8tp/circular-scroll",
+      "at": "2026-05-17T05:32:47Z"
+    },
+    {
+      "label": "pushed to circular-scroll",
+      "repo": "8tp/circular-scroll",
+      "at": "2026-05-17T05:37:29Z"
+    },
+    {
+      "label": "starred FreeTubeApp/FreeTube",
+      "repo": "FreeTubeApp/FreeTube",
+      "at": "2026-05-16T20:45:57Z"
+    },
+    {
+      "label": "DeleteEvent",
+      "repo": "8tp/still-launcher",
+      "at": "2026-05-12T01:39:36Z"
+    },
+    {
+      "label": "pushed to still-launcher",
+      "repo": "8tp/still-launcher",
+      "at": "2026-05-12T01:39:35Z"
+    },
+    {
+      "label": "created branch in still-launcher",
+      "repo": "8tp/still-launcher",
+      "at": "2026-05-12T01:24:47Z"
+    },
+    {
+      "label": "DeleteEvent",
+      "repo": "8tp/still-voice",
+      "at": "2026-05-11T23:16:42Z"
+    },
+    {
+      "label": "pushed to still-voice",
+      "repo": "8tp/still-voice",
+      "at": "2026-05-11T23:16:41Z"
+    },
+    {
+      "label": "DeleteEvent",
+      "repo": "8tp/still-sms",
+      "at": "2026-05-11T23:16:39Z"
     }
   ]
 } as const;

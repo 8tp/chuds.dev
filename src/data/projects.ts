@@ -33,6 +33,20 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "instagib-arena",
+    name: "Instagib Arena",
+    year: 2026,
+    description:
+      "Quake-style instagib FPS in the browser. One-shot railgun, strafe-jump movement, server-authoritative 64 Hz binary netcode with lag compensation, ranked duels, weekly replays, bots. Free, no download.",
+    accent: "cyan",
+    source: "https://github.com/8tp/instagib-arena",
+    website: "https://instagib.win",
+    thumbnail: "/projects/instagib-arena-bw.webp",
+    stack: ["Three.js", "React 19", "Node/ws", "SQLite"],
+    live: true,
+    spotlight: true,
+  },
+  {
     slug: "antmaze",
     name: "AntMaze",
     year: 2026,
@@ -72,7 +86,7 @@ export const projects: Project[] = [
     thumbnail: "/projects/coup-bw.webp",
     stack: ["Next.js", "TypeScript", "Socket.io", "Zustand"],
     live: true,
-    spotlight: true,
+    featured: true,
   },
   {
     slug: "typeduel",
